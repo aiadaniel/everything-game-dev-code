@@ -165,11 +165,63 @@ everything-game-dev-code
 │   │   └── workflow.md
 │   └── README.md
 ├── .opencode
+│   ├── agents
+│   │   └── README.md
 │   ├── commands
+│   │   ├── art-2d-pass.md
+│   │   ├── audio-pass.md
+│   │   ├── bug-triage.md
+│   │   ├── cert-check.md
+│   │   ├── combat-design.md
+│   │   ├── economy-balance.md
 │   │   ├── engine-review.md
+│   │   ├── evolve.md
+│   │   ├── full-game.md
+│   │   ├── gdd.md
+│   │   ├── godot-build-fix.md
+│   │   ├── godot-review.md
+│   │   ├── godot-scene-audit.md
+│   │   ├── godot-setup.md
+│   │   ├── learn.md
+│   │   ├── level-beat.md
+│   │   ├── liveops-brief.md
+│   │   ├── memory-budget.md
+│   │   ├── milestone-plan.md
+│   │   ├── multiplayer-review.md
+│   │   ├── onboarding.md
+│   │   ├── orchestrate.md
+│   │   ├── patch-notes.md
+│   │   ├── perf-budget.md
 │   │   ├── plan.md
+│   │   ├── playtest-report.md
+│   │   ├── qa-plan.md
+│   │   ├── quest-design.md
 │   │   ├── README.md
-│   │   └── verify.md
+│   │   ├── refactor-clean.md
+│   │   ├── release-check.md
+│   │   ├── save-system-review.md
+│   │   ├── scene-bootstrap.md
+│   │   ├── skill-create-game.md
+│   │   ├── tdd.md
+│   │   ├── tech-design.md
+│   │   ├── telemetry-plan.md
+│   │   ├── tools-pass.md
+│   │   ├── ui-asset-pass.md
+│   │   ├── ui-flow-review.md
+│   │   ├── unity-build-fix.md
+│   │   ├── unity-placeholders.md
+│   │   ├── unity-review.md
+│   │   ├── unity-scene-audit.md
+│   │   ├── unity-setup.md
+│   │   ├── unreal-blueprint-audit.md
+│   │   ├── unreal-build-fix.md
+│   │   ├── unreal-review.md
+│   │   ├── unreal-setup.md
+│   │   ├── update-docs.md
+│   │   ├── verify.md
+│   │   └── vertical-slice.md
+│   ├── hooks
+│   │   └── README.md
 │   ├── instructions
 │   │   └── README.md
 │   ├── plugins
@@ -177,14 +229,22 @@ everything-game-dev-code
 │   ├── prompts
 │   │   └── agents
 │   │       └── README.md
+│   ├── rules
+│   │   └── README.md
+│   ├── skills
+│   │   └── README.md
 │   ├── tools
 │   │   └── README.md
+│   ├── .gitignore
 │   ├── index.ts
 │   ├── MIGRATION.md
 │   ├── opencode.json
+│   ├── opencode.json.tui-migration.bak
+│   ├── package-lock.json
 │   ├── package.json
 │   ├── README.md
-│   └── tsconfig.json
+│   ├── tsconfig.json
+│   └── tui.json
 ├── .vscode
 │   └── settings.json
 ├── agents
@@ -509,8 +569,30 @@ everything-game-dev-code
 │   │   ├── package-lock.json
 │   │   ├── package.json
 │   │   ├── TDD.md
-│   │   └── vite.config.js
+│   │   ├── vite.config.js
+│   │   ├── vite.pid
+│   │   ├── vite.stderr.log
+│   │   └── vite.stdout.log
 │   ├── PirateInvadersImagesGen
+│   │   ├── dist
+│   │   │   ├── assets
+│   │   │   │   ├── images
+│   │   │   │   │   ├── battle-background.png
+│   │   │   │   │   ├── brigantine.png
+│   │   │   │   │   ├── button-hover.png
+│   │   │   │   │   ├── button.png
+│   │   │   │   │   ├── enemy-bullet.png
+│   │   │   │   │   ├── galleon.png
+│   │   │   │   │   ├── life-icon.png
+│   │   │   │   │   ├── menu-background.png
+│   │   │   │   │   ├── player-bullet.png
+│   │   │   │   │   ├── player.png
+│   │   │   │   │   ├── powerup.png
+│   │   │   │   │   ├── sloop.png
+│   │   │   │   │   ├── ui-bar-fill.png
+│   │   │   │   │   └── ui-bar-frame.png
+│   │   │   │   └── index-Cu7fnhR5.js
+│   │   │   └── index.html
 │   │   ├── public
 │   │   │   └── assets
 │   │   │       └── images

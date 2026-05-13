@@ -3,15 +3,207 @@
   "command": {
     "plan": {
       "description": "Create an implementation plan",
-      "template": "Use the shared commands/plan.md workflow and shared agents/skills."
+      "template": "Read .opencode/commands/plan.md and execute the shared commands/plan.md workflow."
     },
     "verify": {
       "description": "Verify implementation quality",
-      "template": "Use the shared commands/verify.md workflow and relevant QA/review agents."
+      "template": "Read .opencode/commands/verify.md and execute the shared commands/verify.md workflow."
     },
     "engine-review": {
-      "description": "Review one engine layer",
-      "template": "Pick one engine layer only and use the matching review command."
+      "description": "Review one engine layer (Unity/Unreal/Godot)",
+      "template": "Read .opencode/commands/engine-review.md. Pick one engine layer only."
+    },
+    "gdd": {
+      "description": "Generate a Game Design Document",
+      "template": "Read .opencode/commands/gdd.md and execute the shared commands/gdd.md workflow."
+    },
+    "tdd": {
+      "description": "Generate a Technical Design Document",
+      "template": "Read .opencode/commands/tdd.md and execute the shared commands/tdd.md workflow."
+    },
+    "tech-design": {
+      "description": "Define technical architecture and constraints",
+      "template": "Read .opencode/commands/tech-design.md and execute the shared commands/tech-design.md workflow."
+    },
+    "vertical-slice": {
+      "description": "Plan and scope a vertical slice",
+      "template": "Read .opencode/commands/vertical-slice.md and execute the shared commands/vertical-slice.md workflow."
+    },
+    "milestone-plan": {
+      "description": "Create a milestone plan with scope and risks",
+      "template": "Read .opencode/commands/milestone-plan.md and execute the shared commands/milestone-plan.md workflow."
+    },
+    "orchestrate": {
+      "description": "Coordinate multiple agents for cross-domain tasks",
+      "template": "Read .opencode/commands/orchestrate.md and execute the shared commands/orchestrate.md workflow."
+    },
+    "full-game": {
+      "description": "Orchestrate an entire game from scratch",
+      "template": "Read .opencode/commands/full-game.md and execute the shared commands/full-game.md workflow."
+    },
+    "update-docs": {
+      "description": "Update documentation to sync with implementation",
+      "template": "Read .opencode/commands/update-docs.md and execute the shared commands/update-docs.md workflow."
+    },
+    "combat-design": {
+      "description": "Design or refine combat systems",
+      "template": "Read .opencode/commands/combat-design.md and execute the shared commands/combat-design.md workflow."
+    },
+    "economy-balance": {
+      "description": "Balance game economy and progression",
+      "template": "Read .opencode/commands/economy-balance.md and execute the shared commands/economy-balance.md workflow."
+    },
+    "level-beat": {
+      "description": "Design a level beat or encounter",
+      "template": "Read .opencode/commands/level-beat.md and execute the shared commands/level-beat.md workflow."
+    },
+    "quest-design": {
+      "description": "Design quests and narrative sequences",
+      "template": "Read .opencode/commands/quest-design.md and execute the shared commands/quest-design.md workflow."
+    },
+    "onboarding": {
+      "description": "Design onboarding flows and tutorials",
+      "template": "Read .opencode/commands/onboarding.md and execute the shared commands/onboarding.md workflow."
+    },
+    "art-2d-pass": {
+      "description": "Review and improve 2D art assets",
+      "template": "Read .opencode/commands/art-2d-pass.md and execute the shared commands/art-2d-pass.md workflow."
+    },
+    "audio-pass": {
+      "description": "Review and improve audio implementation",
+      "template": "Read .opencode/commands/audio-pass.md and execute the shared commands/audio-pass.md workflow."
+    },
+    "ui-asset-pass": {
+      "description": "Review and improve UI assets",
+      "template": "Read .opencode/commands/ui-asset-pass.md and execute the shared commands/ui-asset-pass.md workflow."
+    },
+    "ui-flow-review": {
+      "description": "Review UI flows and screen layouts",
+      "template": "Read .opencode/commands/ui-flow-review.md and execute the shared commands/ui-flow-review.md workflow."
+    },
+    "perf-budget": {
+      "description": "Review performance budget and frame targets",
+      "template": "Read .opencode/commands/perf-budget.md and execute the shared commands/perf-budget.md workflow."
+    },
+    "memory-budget": {
+      "description": "Review memory budget and allocation",
+      "template": "Read .opencode/commands/memory-budget.md and execute the shared commands/memory-budget.md workflow."
+    },
+    "multiplayer-review": {
+      "description": "Review multiplayer architecture and replication",
+      "template": "Read .opencode/commands/multiplayer-review.md and execute the shared commands/multiplayer-review.md workflow."
+    },
+    "save-system-review": {
+      "description": "Review save/load architecture",
+      "template": "Read .opencode/commands/save-system-review.md and execute the shared commands/save-system-review.md workflow."
+    },
+    "tools-pass": {
+      "description": "Review and improve developer tooling",
+      "template": "Read .opencode/commands/tools-pass.md and execute the shared commands/tools-pass.md workflow."
+    },
+    "scene-bootstrap": {
+      "description": "Bootstrap a new scene with conventions",
+      "template": "Read .opencode/commands/scene-bootstrap.md and execute the shared commands/scene-bootstrap.md workflow."
+    },
+    "qa-plan": {
+      "description": "Create a QA test plan",
+      "template": "Read .opencode/commands/qa-plan.md and execute the shared commands/qa-plan.md workflow."
+    },
+    "playtest-report": {
+      "description": "Produce a playtest report with findings",
+      "template": "Read .opencode/commands/playtest-report.md and execute the shared commands/playtest-report.md workflow."
+    },
+    "bug-triage": {
+      "description": "Triage bugs by severity and impact",
+      "template": "Read .opencode/commands/bug-triage.md and execute the shared commands/bug-triage.md workflow."
+    },
+    "release-check": {
+      "description": "Run release readiness checklist",
+      "template": "Read .opencode/commands/release-check.md and execute the shared commands/release-check.md workflow."
+    },
+    "cert-check": {
+      "description": "Check platform certification compliance",
+      "template": "Read .opencode/commands/cert-check.md and execute the shared commands/cert-check.md workflow."
+    },
+    "patch-notes": {
+      "description": "Generate patch notes from changelog data",
+      "template": "Read .opencode/commands/patch-notes.md and execute the shared commands/patch-notes.md workflow."
+    },
+    "liveops-brief": {
+      "description": "Create a LiveOps event or content brief",
+      "template": "Read .opencode/commands/liveops-brief.md and execute the shared commands/liveops-brief.md workflow."
+    },
+    "telemetry-plan": {
+      "description": "Define telemetry events and dashboards",
+      "template": "Read .opencode/commands/telemetry-plan.md and execute the shared commands/telemetry-plan.md workflow."
+    },
+    "learn": {
+      "description": "Capture learnings from recent project experience",
+      "template": "Read .opencode/commands/learn.md and execute the shared commands/learn.md workflow."
+    },
+    "evolve": {
+      "description": "Evolve scaffold skills and processes",
+      "template": "Read .opencode/commands/evolve.md and execute the shared commands/evolve.md workflow."
+    },
+    "skill-create-game": {
+      "description": "Formalize a new reusable skill from patterns",
+      "template": "Read .opencode/commands/skill-create-game.md and execute the shared commands/skill-create-game.md workflow."
+    },
+    "refactor-clean": {
+      "description": "Refactor code for clarity and maintainability",
+      "template": "Read .opencode/commands/refactor-clean.md and execute the shared commands/refactor-clean.md workflow."
+    },
+    "unity-setup": {
+      "description": "Bootstrap a Unity project with conventions",
+      "template": "Read .opencode/commands/unity-setup.md and execute the shared commands/unity-setup.md workflow."
+    },
+    "unity-review": {
+      "description": "Review Unity-specific implementation quality",
+      "template": "Read .opencode/commands/unity-review.md and execute the shared commands/unity-review.md workflow."
+    },
+    "unity-build-fix": {
+      "description": "Diagnose and fix Unity build errors",
+      "template": "Read .opencode/commands/unity-build-fix.md and execute the shared commands/unity-build-fix.md workflow."
+    },
+    "unity-scene-audit": {
+      "description": "Audit a Unity scene for conventions",
+      "template": "Read .opencode/commands/unity-scene-audit.md and execute the shared commands/unity-scene-audit.md workflow."
+    },
+    "unity-placeholders": {
+      "description": "Generate Unity placeholder assets",
+      "template": "Read .opencode/commands/unity-placeholders.md and execute the shared commands/unity-placeholders.md workflow."
+    },
+    "unreal-setup": {
+      "description": "Bootstrap an Unreal project with conventions",
+      "template": "Read .opencode/commands/unreal-setup.md and execute the shared commands/unreal-setup.md workflow."
+    },
+    "unreal-review": {
+      "description": "Review Unreal-specific implementation quality",
+      "template": "Read .opencode/commands/unreal-review.md and execute the shared commands/unreal-review.md workflow."
+    },
+    "unreal-build-fix": {
+      "description": "Diagnose and fix Unreal build errors",
+      "template": "Read .opencode/commands/unreal-build-fix.md and execute the shared commands/unreal-build-fix.md workflow."
+    },
+    "unreal-blueprint-audit": {
+      "description": "Audit Unreal Blueprints for conventions",
+      "template": "Read .opencode/commands/unreal-blueprint-audit.md and execute the shared commands/unreal-blueprint-audit.md workflow."
+    },
+    "godot-setup": {
+      "description": "Bootstrap a Godot project with conventions",
+      "template": "Read .opencode/commands/godot-setup.md and execute the shared commands/godot-setup.md workflow."
+    },
+    "godot-review": {
+      "description": "Review Godot-specific implementation quality",
+      "template": "Read .opencode/commands/godot-review.md and execute the shared commands/godot-review.md workflow."
+    },
+    "godot-build-fix": {
+      "description": "Diagnose and fix Godot build errors",
+      "template": "Read .opencode/commands/godot-build-fix.md and execute the shared commands/godot-build-fix.md workflow."
+    },
+    "godot-scene-audit": {
+      "description": "Audit a Godot scene for conventions",
+      "template": "Read .opencode/commands/godot-scene-audit.md and execute the shared commands/godot-scene-audit.md workflow."
     }
   }
 }
