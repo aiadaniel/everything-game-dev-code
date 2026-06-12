@@ -5,7 +5,7 @@ description: Audit web game scenes, screen flow, state transitions, and teardown
 # /web-scene-audit
 
 ## Purpose
-Audit scene/screen structure, state transitions, and teardown in a web (HTML5/canvas) game, covering scene managers or state machines in vanilla canvas projects and scene lifecycles in framework-based (e.g. Phaser 3) projects, including listener cleanup, timer cancellation, and pooled-object release.
+Audit scene/screen structure, state transitions, and teardown in a web (HTML5) game, covering scene managers or state machines in vanilla canvas projects, scene lifecycles in framework-based (e.g. Phaser 3) projects, and 3D scene graphs, including listener cleanup, timer cancellation, pooled-object release, and GPU resource disposal.
 
 ## Use When
 - The task needs a repeatable command entry point rather than an ad hoc workflow.

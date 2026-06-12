@@ -71,7 +71,7 @@
     },
     {
       "id": "web-production",
-      "summary": "Baseline scaffold plus web (HTML5/canvas) surface for a browser game project.",
+      "summary": "Baseline scaffold plus web (HTML5) surface for a 2D or 3D browser game project.",
       "components": [
         "baseline:rules",
         "baseline:agents",

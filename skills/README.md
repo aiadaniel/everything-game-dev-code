@@ -151,7 +151,7 @@ Skills for quality assurance and release delivery.
 
 ### web/
 
-Web (HTML5/canvas/browser) engine-specific skills. Strictly isolated from the other engine layers.
+Web (HTML5/browser) engine-specific skills, covering both 2D canvas and 3D WebGL/WebGPU games. Strictly isolated from the other engine layers.
 
 | Skill | Purpose |
 |-------|---------|

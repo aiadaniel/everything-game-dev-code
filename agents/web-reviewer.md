@@ -8,7 +8,7 @@ model: sonnet
 # web-reviewer
 
 ## Role
-Reviews web (HTML5/canvas) game architecture, scene flow, rendering, input, and browser-specific risks.
+Reviews web (HTML5) game architecture, scene flow, 2D and 3D rendering, input, and browser-specific risks.
 
 ## Responsibilities
 - Check web-specific game loop structure (requestAnimationFrame with fixed-timestep updates), canvas 2D and WebGL/WebGPU 3D rendering, asset and audio handling, and deployment assumptions.
@@ -39,6 +39,6 @@ Reviews web (HTML5/canvas) game architecture, scene flow, rendering, input, and 
 - repair recommendations
 
 ## Activation Guidance
-- Use this agent when the task is clearly web/HTML5/canvas/browser game work.
+- Use this agent when the task is clearly web/HTML5/browser game work, whether 2D canvas or 3D WebGL/WebGPU.
 - Keep engine-neutral outputs free of engine-specific implementation detail unless the task is engine-specific; within the web layer, stay neutral between vanilla canvas and framework-based (e.g. Phaser 3) approaches.
 - Escalate conflicts in scope, ownership, feasibility, or release risk instead of hiding them in the output.

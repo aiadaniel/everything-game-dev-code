@@ -5,7 +5,7 @@ description: Set up or normalize a web (HTML5) project according to the scaffold
 # /web-setup
 
 ## Purpose
-Set up or normalize a web (HTML5/canvas) game project according to the scaffold rules, covering both no-build ES-module setups served via a local server and bundler-based setups such as vite, for vanilla canvas or framework-based (e.g. Phaser 3) projects.
+Set up or normalize a web (HTML5) game project according to the scaffold rules, covering both no-build ES-module setups served via a local server and bundler-based setups such as vite, for vanilla canvas, framework-based (e.g. Phaser 3), or 3D (e.g. Three.js) projects.
 
 ## Use When
 - The task needs a repeatable command entry point rather than an ad hoc workflow.

@@ -58,7 +58,7 @@ Defines 10 predefined installation profiles for common project configurations.
 | `unity-production` | Standard Unity project for a small-to-mid team |
 | `unreal-production` | Standard Unreal project for a small-to-mid team |
 | `godot-production` | Standard Godot project for a small-to-mid team |
-| `web-production` | Standard web (HTML5/canvas) browser game project |
+| `web-production` | Standard web (HTML5) browser game project, 2D or 3D |
 | `unity-multiplayer` | Unity project with explicit multiplayer architecture support |
 | `unreal-aaa-console` | Unreal project at AAA or console scale |
 | `godot-indie-2d` | Small Godot team with a constrained scope (2D platformer, puzzle, etc.) |

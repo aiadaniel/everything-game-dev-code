@@ -55,7 +55,7 @@ Then type commands in the chat:
 | `/unity-build-fix` | Diagnose and fix Unity build errors |
 | `/godot-setup` | Bootstrap a Godot project |
 | `/unreal-setup` | Bootstrap an Unreal project |
-| `/web-setup` | Bootstrap a web (HTML5/canvas) project |
+| `/web-setup` | Bootstrap a web (HTML5) project, 2D canvas or 3D WebGL |
 | `/full-game` | Orchestrate an entire game from scratch (experimental) |
 
 You don't have to follow a specific order. Pick whatever command fits your current need — start a new project, generate a GDD for an existing one, run a QA review, or fix a build error.

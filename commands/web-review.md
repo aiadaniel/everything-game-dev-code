@@ -5,7 +5,7 @@ description: Review a web (HTML5) project for structure, architecture, maintaina
 # /web-review
 
 ## Purpose
-Review a web (HTML5/canvas) game project for structure, architecture, maintainability, and risk, including the game loop (requestAnimationFrame with fixed-timestep updates), rendering approach, asset pipeline, save persistence, and GC-pressure hotspots.
+Review a web (HTML5) game project for structure, architecture, maintainability, and risk, including the game loop (requestAnimationFrame with fixed-timestep updates), 2D or 3D rendering approach, asset pipeline, save persistence, and GC-pressure hotspots.
 
 ## Use When
 - The task needs a repeatable command entry point rather than an ad hoc workflow.

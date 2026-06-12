@@ -60,7 +60,7 @@
     {
       "id": "engine:web",
       "family": "engine",
-      "summary": "Web (HTML5/canvas) rule, skill, command, and review surface.",
+      "summary": "Web (HTML5) rule, skill, command, and review surface.",
       "modules": ["engine-web"]
     },
     {

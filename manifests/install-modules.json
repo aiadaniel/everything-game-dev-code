@@ -79,7 +79,7 @@
         "agents/web-*.md",
         "commands/web-*.md"
       ],
-      "notes": "Web (HTML5/canvas) engine surface. Use with baseline components and avoid mixing with other engine packs in active production profiles."
+      "notes": "Web (HTML5) engine surface. Use with baseline components and avoid mixing with other engine packs in active production profiles."
     },
     "domain-workflow": {
       "includes": [

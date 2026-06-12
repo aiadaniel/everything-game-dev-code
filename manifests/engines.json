@@ -5,7 +5,7 @@
   "engines": [
     {
       "id": "web",
-      "display": "Web (HTML5/canvas)",
+      "display": "Web (HTML5)",
       "pathMarkers": ["index.html", "<canvas", "phaser", "requestanimationframe"],
       "buildResolverAgent": false
     },
