@@ -9,6 +9,7 @@ Applies to asset lifetime, texture memory, event listeners, timers, and teardown
 ## Asset Lifetime Rules
 - Define ownership for loaded images, audio buffers, atlases, and long-lived caches.
 - Track texture memory deliberately; decoded images and WebGL textures consume far more than file size suggests.
+- GPU resources (geometries, materials, textures, render targets) are not garbage collected; each needs a disposal owner, and scene teardown must dispose what it owns.
 - Release or drop references to large assets when scenes no longer need them.
 
 ## Leak Rules

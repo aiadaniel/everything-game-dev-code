@@ -371,6 +371,7 @@ Primary skills:
 - web/web-js-ts-standards
 - web/web-game-architecture
 - web/web-canvas-rendering
+- web/web-3d-rendering
 - web/web-performance
 - web/web-testing
 

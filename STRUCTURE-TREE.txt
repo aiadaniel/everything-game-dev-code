@@ -595,6 +595,7 @@ everything-game-dev-code
 │   │   ├── project-structure.md
 │   │   ├── qa.md
 │   │   ├── README.md
+│   │   ├── rendering-3d.md
 │   │   ├── rendering-canvas.md
 │   │   ├── save-persistence.md
 │   │   ├── scenes-state.md
@@ -1109,6 +1110,8 @@ everything-game-dev-code
 │   │   │   └── SKILL.md
 │   │   └── README.md
 │   ├── web
+│   │   ├── web-3d-rendering
+│   │   │   └── SKILL.md
 │   │   ├── web-build-release
 │   │   │   └── SKILL.md
 │   │   ├── web-canvas-rendering

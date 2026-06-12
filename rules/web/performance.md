@@ -10,6 +10,7 @@ Applies to frame budgets, garbage-collection pressure, allocation discipline, ob
 - Define the frame budget against the weakest supported target device and browser, not the development machine.
 - Avoid optimizing blindly; measure with browser devtools profilers before and after meaningful changes.
 - Draw calls, per-frame allocations, layout thrash, and asset memory must be visible performance concerns.
+- For 3D scenes, triangles, draw calls, shadow-casting lights, and devicePixelRatio are part of the frame budget; track them through renderer statistics, not intuition.
 
 ## Allocation Rules
 - Avoid allocating objects, arrays, or closures inside the frame loop; garbage-collection pauses cause hitches.

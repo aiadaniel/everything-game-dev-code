@@ -28,4 +28,5 @@ Review a web (HTML5/canvas) game project for structure, architecture, maintainab
 ## Notes
 - Keep engine-neutral commands free of engine-specific implementation detail unless an engine-specific command is being called.
 - Apply the same review depth to vanilla canvas and framework-based (e.g. Phaser 3) projects.
+- For 3D projects (Three.js, Babylon.js, raw WebGL2), review rendering through the `web-3d-rendering` skill and `rules/web/rendering-3d.md`.
 - Escalate to the relevant reviewer or specialist when risks exceed the command's normal scope.

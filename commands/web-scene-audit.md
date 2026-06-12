@@ -28,4 +28,5 @@ Audit scene/screen structure, state transitions, and teardown in a web (HTML5/ca
 ## Notes
 - Keep engine-neutral commands free of engine-specific implementation detail unless an engine-specific command is being called.
 - Pay special attention to teardown leaks: dangling event listeners, uncancelled animation frames, and audio nodes left running across transitions.
+- In 3D projects, teardown also covers GPU resources: audit geometry/material/texture disposal via the `web-3d-rendering` skill and verify scene cycles hold GPU memory flat.
 - Escalate to the relevant reviewer or specialist when risks exceed the command's normal scope.

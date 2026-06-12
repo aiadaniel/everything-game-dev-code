@@ -155,6 +155,7 @@ Web (HTML5/canvas/browser) engine-specific skills. Strictly isolated from the ot
 
 | Skill | Purpose |
 |-------|---------|
+| `web-3d-rendering` | Real-time 3D scenes: camera/lights, glTF pipeline, GPU budgets, and disposal discipline |
 | `web-build-release` | Build tooling, bundling decisions, and deployment to static hosts |
 | `web-canvas-rendering` | Canvas 2D/WebGL rendering conventions, pixel-art crispness, scaling, and batching |
 | `web-game-architecture` | Game loop, fixed timestep, state machines, and system boundaries |

@@ -8,6 +8,7 @@ Applies to context choice, resolution and DPI handling, layering, draw batching,
 
 ## Context Rules
 - Choose canvas 2D or WebGL deliberately based on draw volume, effects, and team familiarity; document the choice.
+- This rule covers 2D presentation; real-time 3D games follow `rules/web/rendering-3d.md` instead.
 - For pixel art, disable image smoothing, set the image-rendering style appropriately, and scale by integer factors.
 - Handle devicePixelRatio explicitly so backing-store resolution matches display density without blurring.
 

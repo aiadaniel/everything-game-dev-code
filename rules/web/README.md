@@ -14,6 +14,8 @@ Extends `rules/common/` with web-specific conventions.
 - patterns
 - performance
 - memory
+- 2D canvas rendering
+- 3D rendering (WebGL/WebGPU)
 - build and release
 - asset pipeline
 - tooling

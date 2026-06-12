@@ -11,7 +11,7 @@ model: sonnet
 Reviews web (HTML5/canvas) game architecture, scene flow, rendering, input, and browser-specific risks.
 
 ## Responsibilities
-- Check web-specific game loop structure (requestAnimationFrame with fixed-timestep updates), canvas/WebGL rendering, asset and audio handling, and deployment assumptions.
+- Check web-specific game loop structure (requestAnimationFrame with fixed-timestep updates), canvas 2D and WebGL/WebGPU 3D rendering, asset and audio handling, and deployment assumptions.
 - Identify risks around scene teardown, GC pressure and object pooling, WebAudio autoplay unlock, save persistence (localStorage/IndexedDB), and browser/device compatibility.
 - Keep web advice inside the web layer and guard engine isolation for it.
 
@@ -20,6 +20,7 @@ Reviews web (HTML5/canvas) game architecture, scene flow, rendering, input, and 
 - web-js-ts-standards
 - web-game-architecture
 - web-canvas-rendering
+- web-3d-rendering
 - web-input-touch
 - web-performance
 - web-build-release
