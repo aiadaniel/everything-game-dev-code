@@ -4,7 +4,7 @@ Generated from the current repository structure. Update with `npm run sync:struc
 
 ## Current Count
 - Agents: 43
-- Commands: 63
+- Commands: 65
 - Skills: 97
 - Rule files: 115
 

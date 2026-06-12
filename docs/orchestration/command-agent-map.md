@@ -403,6 +403,13 @@ Support:
 - `technical-artist`
 - `qa-lead`
 
+### /godot-placeholders
+Primary: `godot-reviewer`
+Support:
+- `2d-artist`
+- `technical-artist`
+- `architect`
+
 ## Web Engine Commands
 
 ### /web-setup
@@ -428,3 +435,9 @@ Primary: `web-reviewer`
 Support:
 - `ui-programmer`
 - `qa-lead`
+
+### /web-placeholders
+Primary: `web-reviewer`
+Support:
+- `2d-artist`
+- `architect`

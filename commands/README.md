@@ -45,6 +45,8 @@ Commands do not replace judgment. They channel it.
 |---------|---------|
 | `/tdd` | Implement a feature using test-driven development |
 | `/unity-placeholders` | Generate placeholder sprites, prefabs, and procedural audio for testable gameplay |
+| `/godot-placeholders` | Generate placeholder textures, scenes, and procedural audio for a Godot project |
+| `/web-placeholders` | Generate canvas-drawn placeholder sprites and Web Audio sound stubs for a web game |
 | `/scene-bootstrap` | Bootstrap a game scene with GameObjects, scripts, and wired inspector references |
 | `/evolve` | Iteratively refine an existing system or feature |
 | `/tools-pass` | Improve or extend editor and pipeline tooling |

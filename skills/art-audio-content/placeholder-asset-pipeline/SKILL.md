@@ -51,9 +51,13 @@ Define creation, naming, and replacement rules for placeholder assets so the gam
 - 2d-artist
 - technical-artist
 - unity-reviewer
+- godot-reviewer
+- web-reviewer
 
 ## Related Commands
 - unity-placeholders
+- godot-placeholders
+- web-placeholders
 - scene-bootstrap
 - art-2d-pass
 

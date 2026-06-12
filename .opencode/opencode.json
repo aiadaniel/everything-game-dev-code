@@ -61,6 +61,10 @@
       "description": "Diagnose and resolve Godot export, script, or project configuration issues.",
       "template": "Read .opencode/commands/godot-build-fix.md and execute the shared commands/godot-build-fix.md workflow."
     },
+    "godot-placeholders": {
+      "description": "Generate placeholder textures, scenes, and audio stubs for a Godot project so the game is visually testable before final assets exist.",
+      "template": "Read .opencode/commands/godot-placeholders.md and execute the shared commands/godot-placeholders.md workflow."
+    },
     "godot-review": {
       "description": "Review a Godot project for structure, architecture, maintainability, and risk.",
       "template": "Read .opencode/commands/godot-review.md and execute the shared commands/godot-review.md workflow."
@@ -236,6 +240,10 @@
     "web-build-fix": {
       "description": "Diagnose and resolve web build, bundling, or deployment issues.",
       "template": "Read .opencode/commands/web-build-fix.md and execute the shared commands/web-build-fix.md workflow."
+    },
+    "web-placeholders": {
+      "description": "Generate placeholder sprites and audio stubs for a web (HTML5) game so it is visually testable before final assets exist.",
+      "template": "Read .opencode/commands/web-placeholders.md and execute the shared commands/web-placeholders.md workflow."
     },
     "web-review": {
       "description": "Review a web (HTML5) project for structure, architecture, maintainability, and risk.",

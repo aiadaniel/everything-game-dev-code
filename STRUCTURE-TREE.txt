@@ -19,6 +19,7 @@ everything-game-dev-code
 │   │   ├── game-feel-pass.md
 │   │   ├── gdd.md
 │   │   ├── godot-build-fix.md
+│   │   ├── godot-placeholders.md
 │   │   ├── godot-review.md
 │   │   ├── godot-scene-audit.md
 │   │   ├── godot-setup.md
@@ -64,6 +65,7 @@ everything-game-dev-code
 │   │   ├── verify.md
 │   │   ├── vertical-slice.md
 │   │   ├── web-build-fix.md
+│   │   ├── web-placeholders.md
 │   │   ├── web-review.md
 │   │   ├── web-scene-audit.md
 │   │   └── web-setup.md
@@ -102,6 +104,7 @@ everything-game-dev-code
 │   │   ├── game-feel-pass.md
 │   │   ├── gdd.md
 │   │   ├── godot-build-fix.md
+│   │   ├── godot-placeholders.md
 │   │   ├── godot-review.md
 │   │   ├── godot-scene-audit.md
 │   │   ├── godot-setup.md
@@ -147,6 +150,7 @@ everything-game-dev-code
 │   │   ├── verify.md
 │   │   ├── vertical-slice.md
 │   │   ├── web-build-fix.md
+│   │   ├── web-placeholders.md
 │   │   ├── web-review.md
 │   │   ├── web-scene-audit.md
 │   │   └── web-setup.md
@@ -207,6 +211,7 @@ everything-game-dev-code
 │   │   ├── game-feel-pass.md
 │   │   ├── gdd.md
 │   │   ├── godot-build-fix.md
+│   │   ├── godot-placeholders.md
 │   │   ├── godot-review.md
 │   │   ├── godot-scene-audit.md
 │   │   ├── godot-setup.md
@@ -252,6 +257,7 @@ everything-game-dev-code
 │   │   ├── verify.md
 │   │   ├── vertical-slice.md
 │   │   ├── web-build-fix.md
+│   │   ├── web-placeholders.md
 │   │   ├── web-review.md
 │   │   ├── web-scene-audit.md
 │   │   └── web-setup.md
@@ -337,6 +343,7 @@ everything-game-dev-code
 │   ├── game-feel-pass.md
 │   ├── gdd.md
 │   ├── godot-build-fix.md
+│   ├── godot-placeholders.md
 │   ├── godot-review.md
 │   ├── godot-scene-audit.md
 │   ├── godot-setup.md
@@ -382,6 +389,7 @@ everything-game-dev-code
 │   ├── verify.md
 │   ├── vertical-slice.md
 │   ├── web-build-fix.md
+│   ├── web-placeholders.md
 │   ├── web-review.md
 │   ├── web-scene-audit.md
 │   └── web-setup.md
