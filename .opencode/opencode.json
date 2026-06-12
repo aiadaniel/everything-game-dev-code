@@ -66,7 +66,7 @@
       "template": "Read .opencode/commands/godot-build-fix.md and execute the shared commands/godot-build-fix.md workflow."
     },
     "godot-placeholders": {
-      "description": "Generate placeholder textures, scenes, and audio stubs for a Godot project so the game is visually testable before final assets exist.",
+      "description": "Generate placeholder textures, scenes, 3D primitive meshes, and audio stubs for a Godot project so the game is visually testable before final assets exist.",
       "template": "Read .opencode/commands/godot-placeholders.md and execute the shared commands/godot-placeholders.md workflow."
     },
     "godot-review": {
@@ -198,7 +198,7 @@
       "template": "Read .opencode/commands/unity-build-fix.md and execute the shared commands/unity-build-fix.md workflow."
     },
     "unity-placeholders": {
-      "description": "Generate placeholder sprites, prefabs, and audio stubs for a Unity project so the game is visually testable before final assets exist.",
+      "description": "Generate placeholder sprites, 3D primitives, prefabs, and audio stubs for a Unity project so the game is visually testable before final assets exist.",
       "template": "Read .opencode/commands/unity-placeholders.md and execute the shared commands/unity-placeholders.md workflow."
     },
     "unity-review": {
@@ -246,7 +246,7 @@
       "template": "Read .opencode/commands/web-build-fix.md and execute the shared commands/web-build-fix.md workflow."
     },
     "web-placeholders": {
-      "description": "Generate placeholder sprites and audio stubs for a web (HTML5) game so it is visually testable before final assets exist.",
+      "description": "Generate placeholder sprites, 3D primitives, and audio stubs for a web (HTML5) game so it is visually testable before final assets exist.",
       "template": "Read .opencode/commands/web-placeholders.md and execute the shared commands/web-placeholders.md workflow."
     },
     "web-review": {
