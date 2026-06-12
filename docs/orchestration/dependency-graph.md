@@ -143,6 +143,7 @@ graph LR
   s_playtest_analysis{{"playtest-analysis"}}:::skill
   c_bug_triage["/bug-triage"]:::command
   s_bug_triage{{"bug-triage"}}:::skill
+  s_crash_triage{{"crash-triage"}}:::skill
   c_refactor_clean["/refactor-clean"]:::command
   a_refactor_cleaner("refactor-cleaner"):::agent
   s_gameplay_architecture{{"gameplay-architecture"}}:::skill
@@ -163,6 +164,7 @@ graph LR
   c_bug_triage --> a_qa_lead
   c_bug_triage --> a_producer
   c_bug_triage -.-> s_bug_triage
+  c_bug_triage -.-> s_crash_triage
   c_refactor_clean --> a_refactor_cleaner
   c_refactor_clean --> a_code_reviewer
   c_refactor_clean -.-> s_gameplay_architecture
@@ -370,6 +372,7 @@ graph LR
   s_console_certification{{"console-certification"}}:::skill
   c_cert_check["/cert-check"]:::command
   a_console_compliance_reviewer("console-compliance-reviewer"):::agent
+  s_compliance_checklists{{"compliance-checklists"}}:::skill
   c_patch_notes["/patch-notes"]:::command
   a_doc_updater("doc-updater"):::agent
   c_release_check --> a_release_manager
@@ -379,6 +382,7 @@ graph LR
   c_cert_check --> a_console_compliance_reviewer
   c_cert_check --> a_release_manager
   c_cert_check -.-> s_console_certification
+  c_cert_check -.-> s_compliance_checklists
   c_patch_notes --> a_release_manager
   c_patch_notes --> a_doc_updater
   c_patch_notes -.-> s_release_readiness
@@ -553,21 +557,5 @@ graph LR
 
 ## Orphaned Skills
 
-Skills referenced by no command (Required Skills) and no agent (Uses These Skills): 16 of 97. These are reachable only through the agent-skill matrix or ad hoc use — candidates for a command entry point or an explicit agent assignment.
+Skills referenced by no command (Required Skills) and no agent (Uses These Skills): 0 of 97. These are reachable only through the agent-skill matrix or ad hoc use — candidates for a command entry point or an explicit agent assignment.
 
-- `art-audio-content/cinematic-pipeline`
-- `godot/godot-csharp-patterns`
-- `godot/godot-gdscript-standards`
-- `godot/godot-resource-management`
-- `godot/godot-signals-patterns`
-- `qa-release/compliance-checklists`
-- `qa-release/crash-triage`
-- `unity/unity-addressables`
-- `unity/unity-csharp-standards`
-- `unity/unity-gameplay-patterns`
-- `unity/unity-input-system`
-- `unity/unity-urp-hdrp`
-- `unreal/unreal-cpp-standards`
-- `unreal/unreal-gameplay-framework`
-- `unreal/unreal-gas-patterns`
-- `unreal/unreal-replication`

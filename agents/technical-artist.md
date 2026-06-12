@@ -18,6 +18,7 @@ Owns art pipeline quality, shaders, import settings, and runtime visual performa
 ## Uses These Skills
 - technical-art-pipeline
 - vfx-pipeline
+- cinematic-pipeline
 - asset-management
 - performance-budgeting
 

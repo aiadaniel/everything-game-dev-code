@@ -17,6 +17,10 @@ Reviews Unreal architecture, content boundaries, engine integration, and Unreal-
 
 ## Uses These Skills
 - unreal-project-structure
+- unreal-cpp-standards
+- unreal-gameplay-framework
+- unreal-gas-patterns
+- unreal-replication
 - unreal-testing
 - unreal-performance
 - unreal-build-release

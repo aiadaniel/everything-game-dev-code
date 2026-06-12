@@ -17,6 +17,11 @@ Reviews Unity architecture, project structure, engine integration, and Unity-spe
 
 ## Uses These Skills
 - unity-project-structure
+- unity-csharp-standards
+- unity-gameplay-patterns
+- unity-input-system
+- unity-addressables
+- unity-urp-hdrp
 - unity-testing
 - unity-performance
 - unity-build-release

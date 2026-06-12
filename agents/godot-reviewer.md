@@ -17,6 +17,10 @@ Reviews Godot architecture, scene structure, resource usage, and engine-specific
 
 ## Uses These Skills
 - godot-project-structure
+- godot-gdscript-standards
+- godot-csharp-patterns
+- godot-signals-patterns
+- godot-resource-management
 - godot-testing
 - godot-performance
 - godot-build-release

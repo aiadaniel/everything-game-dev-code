@@ -143,6 +143,7 @@ Secondary skills:
 Primary skills:
 - art-audio-content/technical-art-pipeline
 - art-audio-content/vfx-pipeline
+- art-audio-content/cinematic-pipeline
 - engineering-common/asset-management
 - engineering-common/performance-budgeting
 
@@ -310,6 +311,12 @@ Primary skills:
 - unity/unity-performance
 - unity/unity-testing
 
+Secondary skills:
+- unity/unity-input-system
+- unity/unity-addressables
+- unity/unity-urp-hdrp
+- unity/unity-build-release
+
 ### unity-build-resolver
 Primary skills:
 - unity/unity-build-release
@@ -324,6 +331,12 @@ Primary skills:
 - unreal/unreal-performance
 - unreal/unreal-testing
 
+Secondary skills:
+- unreal/unreal-gameplay-framework
+- unreal/unreal-gas-patterns
+- unreal/unreal-replication
+- unreal/unreal-build-release
+
 ### unreal-build-resolver
 Primary skills:
 - unreal/unreal-build-release
@@ -337,6 +350,12 @@ Primary skills:
 - godot/godot-scene-architecture
 - godot/godot-performance
 - godot/godot-testing
+
+Secondary skills:
+- godot/godot-csharp-patterns
+- godot/godot-signals-patterns
+- godot/godot-resource-management
+- godot/godot-build-release
 
 ### godot-build-resolver
 Primary skills:
