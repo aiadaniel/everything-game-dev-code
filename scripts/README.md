@@ -51,7 +51,7 @@ node scripts/generate-assets.js --type model3d --prompt "low poly crystal tower"
 node scripts/generate-assets.js --type video --prompt "studio logo reveal" --out staging/ --dry-run
 ```
 
-Requires the provider's API key in the environment (`FAL_KEY` for the default fal.ai provider). Entry point: the `/generate-assets` command. Always `--dry-run` first for expensive capabilities (video).
+Requires the provider's API key in the environment (`FAL_KEY` for the default fal.ai provider); without it the script reports the capability as unavailable and points to the placeholder commands. Entry point: the `/generate-assets` command. Every run prints a cost estimate and enforces a confirmation gate — runs at or above `confirmOverUsd` (registry default, overridable via `--confirm-over` / `ASSET_GEN_CONFIRM_OVER`) refuse to start without `--yes` (or `ASSET_GEN_YES=1`). Always `--dry-run` first to see the estimate, especially for expensive capabilities (video).
 
 ### Validation
 

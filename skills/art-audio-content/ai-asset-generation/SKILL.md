@@ -32,6 +32,19 @@ Detecting the gate is cheap: the generator (`scripts/generate-assets.js`) reads 
 key from the environment and reports clearly when it is missing, pointing back to
 the placeholder path. Never fabricate or hand-place assets to "stand in" for the API.
 
+## Resolution Order and Cost
+- **Prefer free before paid.** For `image`/`skybox` (the registry's
+  `nativeFirstCapabilities`), if the running harness has a native image generator
+  (e.g. Codex `$imagegen`), use it instead of the paid API — keep the same names,
+  paths, and acceptance gates. Fall to the API only when no native generator exists
+  and a key is set; fall to placeholders otherwise. `model3d`/`sfx`/`music`/`speech`/
+  `video` have no native path — API or placeholders only.
+- **Confirm before spending.** Every run prints an estimated cost; the generator
+  refuses runs at or above `confirmOverUsd` without `--yes`. For a single asset the
+  user explicitly asked for, dry-run, show the estimate, and proceed if cheap. For
+  autonomous or batch flows, get a clear yes on the total before running. Iterate on
+  the cheap default model; reserve the expensive alternative and video for finals.
+
 ## Use When
 - placeholder assets exist and the project is ready to upgrade them to real content
 - a game needs images, textures, skyboxes, 3D models, sound effects, music, voice

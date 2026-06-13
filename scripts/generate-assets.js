@@ -18,7 +18,17 @@
 //   --input-json <json>   raw JSON merged over the assembled request input (wins on conflict)
 //   --poll-ms <n>         queue polling interval (default 3000)
 //   --timeout-ms <n>      overall timeout (default 900000 = 15 min; video can be slow)
-//   --dry-run             print the resolved model and payload without calling the API
+//   --confirm-over <usd>  override the registry cost threshold for this run
+//   --yes                 acknowledge the estimated cost and run without the gate
+//   --dry-run             print the resolved model, payload, and cost estimate; no request
+//
+// Cost confirmation: every run prints an estimated USD cost (from estCostUsd in
+// the registry x the number of outputs). If that estimate is at or above the
+// confirm threshold (registry confirmOverUsd, or --confirm-over, or the
+// ASSET_GEN_CONFIRM_OVER env var) the run refuses to start and asks to be
+// re-invoked with --yes — so an agent must surface the cost to the user and get
+// confirmation before spending. Set ASSET_GEN_YES=1 to pre-authorize all runs.
+// Estimates are approximate; the provider bills the real amount.
 //
 // Every downloaded file gets a <name>.provenance.json sidecar (provider, model,
 // prompt, seed, request id, timestamp, source URLs) — required by the
@@ -78,6 +88,23 @@ function parseArgs(argv) {
     i += 1;
   }
   return args;
+}
+
+// Rough run-cost estimate: per-output capability cost x output count. num_images
+// (image/skybox) and explicit batch counts scale it; everything else is one unit.
+function estimateCostUsd(capability, input) {
+  const per = typeof capability.estCostUsd === "number" ? capability.estCostUsd : 0;
+  const count = Number(input.num_images) > 0 ? Number(input.num_images) : 1;
+  return per * count;
+}
+
+function resolveConfirmThreshold(registry, args) {
+  if (args["confirm-over"] !== undefined) return Number(args["confirm-over"]);
+  if (process.env.ASSET_GEN_CONFIRM_OVER !== undefined) {
+    return Number(process.env.ASSET_GEN_CONFIRM_OVER);
+  }
+  if (typeof registry.confirmOverUsd === "number") return registry.confirmOverUsd;
+  return Infinity; // no threshold configured: never gate
 }
 
 function slugify(text, maxLength) {
@@ -208,6 +235,11 @@ async function main() {
 
   const endpoint = `${provider.queueBaseUrl}/${model}`;
 
+  const estUsd = estimateCostUsd(capability, input);
+  const threshold = resolveConfirmThreshold(registry, args);
+  const preApproved = args.yes || process.env.ASSET_GEN_YES === "1";
+  const estLabel = capability.estCostUsd === undefined ? "unknown" : `~$${estUsd.toFixed(2)}`;
+
   if (args.dryRun) {
     console.log(`DRY RUN — no request sent.`);
     console.log(`provider : ${provider.id} (${provider.display})`);
@@ -215,7 +247,26 @@ async function main() {
     console.log(`endpoint : POST ${endpoint}`);
     console.log(`input    : ${JSON.stringify(input, null, 2)}`);
     console.log(`output   : ${capability.output} -> ${outDir}`);
+    console.log(`est. cost : ${estLabel}`);
+    if (Number.isFinite(threshold)) {
+      console.log(
+        `confirm   : runs >= $${threshold.toFixed(2)} need --yes (this run ${
+          estUsd >= threshold ? "WOULD" : "would not"
+        } be gated)`
+      );
+    }
     return;
+  }
+
+  // Cost gate: refuse to spend at or above the threshold without explicit
+  // acknowledgement, so an agent must confirm the cost with the user first.
+  if (estUsd >= threshold && !preApproved) {
+    fail(
+      `Estimated cost ${estLabel} is at or above the confirmation threshold of $${threshold.toFixed(2)}. ` +
+        `Surface this cost to the user and, once they confirm, re-run with --yes (or set ASSET_GEN_YES=1 to ` +
+        `pre-authorize all runs, or raise the threshold with --confirm-over / ASSET_GEN_CONFIRM_OVER). ` +
+        `Cheaper options: a lower-cost model via --model, fewer outputs, or the procedural placeholder path.`
+    );
   }
 
   const apiKey = process.env[provider.apiKeyEnv];
@@ -234,7 +285,7 @@ async function main() {
     "Content-Type": "application/json",
   };
 
-  console.log(`Submitting ${type} request to ${model} ...`);
+  console.log(`Submitting ${type} request to ${model} (est. ${estLabel}) ...`);
   const submitted = await requestJson(
     endpoint,
     { method: "POST", headers, body: JSON.stringify(input) },

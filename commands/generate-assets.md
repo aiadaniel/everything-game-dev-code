@@ -24,6 +24,26 @@ fal.ai provider). Decide before doing anything else:
   procedural / Canvas / WebAudio pipelines via `placeholder-asset-pipeline`. Tell
   the user the API path is available if they set a key, then continue with placeholders.
 
+## Resolution Order (per capability)
+- For `image` and `skybox` (see `nativeFirstCapabilities` in the registry): prefer a
+  harness-native image generator if the running harness has one (e.g. Codex
+  `$imagegen` — free, no key), then the API provider if a key is set, then
+  placeholders. This harness (Claude Code) has no native image generator, so it goes
+  API-then-placeholder.
+- For `model3d`, `sfx`, `music`, `speech`, `video`: no harness-native path exists —
+  only the API provider (if a key is set) or placeholders.
+
+## Cost & Confirmation
+- API generation costs real money. A directly typed `/generate-assets` is consent for
+  the scope the user described, but always `--dry-run` first to see the printed cost
+  estimate, and explicitly confirm before expensive runs (video, large batches).
+- The script enforces a gate: runs estimated at or above the registry `confirmOverUsd`
+  threshold refuse to start without `--yes`. When that happens, surface the estimate
+  to the user, get a yes, then re-run with `--yes` — do not auto-bypass with
+  `ASSET_GEN_YES=1` on the user's behalf.
+- Cheaper-first: iterate on the low-cost default model, switch to a higher-fidelity
+  alternative only for finals; for `image`/`skybox` prefer the free native path.
+
 ## Use When
 - placeholder assets exist and the project is ready for real visuals, audio, or video
 - a specific asset is missing and no artist is available: a sprite, a tileable

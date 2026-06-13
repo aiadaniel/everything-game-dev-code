@@ -30,6 +30,8 @@ Each provider declares an `id`, `display` name, `queueBaseUrl` (async queue API)
 
 This layer is optional and capability-gated: it activates only when the provider's `apiKeyEnv` (e.g. `FAL_KEY`) is set in the environment. With no key, the scaffold falls back to its built-in placeholder/procedural asset tooling and behaves exactly as it did before this layer existed (see `rules/common/asset-pipeline.md`). The default provider is fal.ai because one pay-per-use key covers every asset modality. Model catalogs rotate quickly — verify model ids against the provider catalog when starting a new project.
 
+Top-level fields beyond the providers also drive behavior: `nativeFirstCapabilities` lists the image-shaped capabilities (`image`, `skybox`) that a free harness-native generator (e.g. Codex `$imagegen`) should serve before the paid API; `confirmOverUsd` is the cost threshold above which a run must be confirmed; and each capability's `estCostUsd` is the rough per-output cost the generator uses to estimate a run and decide whether to gate it.
+
 ### install-components.json
 
 Defines the 18 components that form the scaffold's logical groupings.

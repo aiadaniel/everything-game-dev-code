@@ -123,7 +123,15 @@ available to upgrade placeholders to real content from text prompts:
 2. Run `/generate-assets` to produce images and textures, equirectangular skyboxes, 3D models (GLB/OBJ), sound effects, music, voice lines, and intro/cinematic video — dropped onto those same names and paths (zero code changes).
 3. Import through the active engine layer and review with the matching pass command (`/art-2d-pass`, `/art-3d-pass`, `/audio-pass`).
 
-Capability-to-model routing lives in [manifests/asset-providers.json](manifests/asset-providers.json) (default provider: fal.ai — one pay-per-use key covers every modality). `scripts/generate-assets.js` performs the generation and writes a `.provenance.json` sidecar (provider, model, prompt, seed, request id) per run; assets without provenance are treated as unlicensed content. The key is read only from the `FAL_KEY` environment variable and is never committed (`.env` files are gitignored). Governance rules — including the optional-capability and fallback policy — live in [rules/common/asset-pipeline.md](rules/common/asset-pipeline.md). For a worked end-to-end example see the `samples/PrismDefense3DAssetsGen` variant.
+**Resolution order and cost.** For images and skyboxes the scaffold prefers a free
+harness-native generator (e.g. Codex `$imagegen`) when the running harness has one,
+then the paid API, then placeholders; 3D/audio/video only have the API or placeholder
+paths. Because the API costs money, generation asks before spending: every run prints
+a cost estimate, and `scripts/generate-assets.js` refuses runs at or above a
+configurable threshold (`confirmOverUsd`) without explicit confirmation. Autonomous
+flows like `/full-game` keep placeholders as the default and ask once before any spend.
+
+Capability-to-model routing lives in [manifests/asset-providers.json](manifests/asset-providers.json) (default provider: fal.ai — one pay-per-use key covers every modality). `scripts/generate-assets.js` performs the generation and writes a `.provenance.json` sidecar (provider, model, prompt, seed, request id) per run; assets without provenance are treated as unlicensed content. The key is read only from the `FAL_KEY` environment variable and is never committed (`.env` files are gitignored). Governance rules — the optional-capability, resolution-order, and cost-confirmation policy — live in [rules/common/asset-pipeline.md](rules/common/asset-pipeline.md). For a worked end-to-end example see the `samples/PrismDefense3DAssetsGen` variant.
 
 ## Intended Use Cases
 - New game project setup

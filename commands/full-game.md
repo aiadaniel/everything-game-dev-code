@@ -203,13 +203,23 @@ Based on target platform:
 All placeholders must be wired — the game must be visually and audibly playable
 after this phase with no manual setup.
 
-**Placeholders are the default and always sufficient.** Optionally, if the active
-provider's API key is present in the environment (`FAL_KEY` for fal.ai), this phase
-MAY upgrade the wired placeholders to AI-generated assets via `/generate-assets`
-(see `ai-asset-generation`): generate onto the same names and paths the placeholders
-use, keep the drop-in contract, and record acceptances in `generated-assets.json`.
-If no key is present, do not attempt generation and do not treat it as a gap —
-ship the placeholders. Either way, the game must be fully playable after this phase.
+**Placeholders are the default and always sufficient.** This phase does NOT spend
+money on assets on its own. After wiring placeholders:
+
+- If no provider key is present (`FAL_KEY` for fal.ai), ship the placeholders. Do not
+  treat the absence as a gap.
+- If a key IS present, do not silently start generating. Stop and ask the user once,
+  with the estimated total cost, whether to upgrade placeholders to AI-generated
+  assets (`/generate-assets` + `ai-asset-generation`) or keep placeholders. Default to
+  placeholders if the run is autonomous and the user cannot answer.
+- When the user opts in, prefer the free path where it exists: for images/skyboxes,
+  use the harness-native generator (e.g. Codex `$imagegen`) if available before the
+  paid API; 3D/audio/video only have the API path. Generate onto the same names and
+  paths the placeholders use, keep the drop-in contract, respect the script's cost
+  gate (`--yes` only after the user confirms), and record acceptances in
+  `generated-assets.json`.
+
+Either way, the game must be fully playable after this phase.
 
 ---
 

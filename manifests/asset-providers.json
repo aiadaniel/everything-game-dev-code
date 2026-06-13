@@ -3,6 +3,8 @@
   "version": 1,
   "description": "Generative asset provider registry — the single source of truth for which AI generation provider and model serves each asset capability. This whole layer is OPTIONAL: it activates only when a provider's apiKeyEnv is set in the environment; without a key the scaffold uses its built-in placeholder/procedural asset tooling as the default (see rules/common/asset-pipeline.md). scripts/generate-assets.js resolves capability-to-model routing from this file; swapping a default model or adding a provider is a manifest edit, not a code edit. Model catalogs rotate quickly: verify a model id against the provider catalog before relying on it in a new project.",
   "defaultProvider": "fal",
+  "confirmOverUsd": 0.5,
+  "nativeFirstCapabilities": ["image", "skybox"],
   "providers": [
     {
       "id": "fal",
@@ -23,6 +25,7 @@
           "promptField": "prompt",
           "defaults": { "image_size": "square", "num_images": 1 },
           "output": "png",
+          "estCostUsd": 0.04,
           "notes": "Sprites, textures, UI art, concept art. Iterate on nano-banana-2 (fast/cheap), switch to nano-banana-pro for finals. For tileable textures, ask for 'seamless tileable texture' explicitly and verify edges."
         },
         "skybox": {
@@ -30,6 +33,7 @@
           "promptField": "prompt",
           "defaults": { "image_size": "landscape_16_9", "num_images": 1 },
           "output": "png",
+          "estCostUsd": 0.08,
           "notes": "Prompt for a '360 degree equirectangular panorama' and validate the horizon line before engine import; engines expect a 2:1 equirectangular projection for sky materials."
         },
         "model3d": {
@@ -38,6 +42,7 @@
           "promptField": "prompt",
           "defaults": {},
           "output": "glb",
+          "estCostUsd": 0.3,
           "notes": "Tencent Hunyuan3D. GLB output imports into Unity, Unreal, Godot, and Three.js without conversion. Use the image-to-3d variant to lift accepted concept art into 3D. Static meshes only — rigging/animation needs a dedicated provider."
         },
         "sfx": {
@@ -46,6 +51,7 @@
           "promptField": "text",
           "defaults": {},
           "output": "mp3",
+          "estCostUsd": 0.05,
           "notes": "Short gameplay sound effects from a text description. Keep descriptions physical and concrete ('metal coin dropping on stone, short, bright')."
         },
         "music": {
@@ -54,6 +60,7 @@
           "promptField": "prompt",
           "defaults": { "duration": 30 },
           "output": "wav",
+          "estCostUsd": 0.1,
           "notes": "Background music and stingers. Specify genre, tempo, mood, and loopability in the prompt; verify loop points manually before integration."
         },
         "speech": {
@@ -62,6 +69,7 @@
           "promptField": "text",
           "defaults": {},
           "output": "mp3",
+          "estCostUsd": 0.05,
           "notes": "Voice-over and character barks. Localized VO must follow the localization pipeline, not ad hoc generation."
         },
         "video": {
@@ -74,6 +82,7 @@
           "promptField": "prompt",
           "defaults": { "duration": "5", "aspect_ratio": "16:9" },
           "output": "mp4",
+          "estCostUsd": 1.2,
           "notes": "Intro videos, cinematics, trailers. Image-to-video (the first alternative; pass image_url via --input-json) gives more art-directed control than pure text-to-video. Seedance 2.0 and Veo 3 generate audio natively. Video is the most expensive capability — always dry-run and estimate before batch runs."
         }
       }
