@@ -4,6 +4,9 @@ All notable changes to this scaffold should be documented here.
 
 ## Unreleased
 
+### Changed
+- AI asset generation is now documented everywhere as an OPTIONAL, capability-gated layer rather than a core path: it activates only when the provider API key is in the environment (`FAL_KEY` for fal.ai), and with no key the scaffold falls back to its built-in placeholder/procedural tooling and behaves exactly as before. Reframed across `rules/common/asset-pipeline.md` (new optional-capability + no-fabrication rules), `/generate-assets` (a "Capability Gate" section up top), the `ai-asset-generation` skill, `/full-game` Phase 5 (placeholders are the default; generation is an optional in-place upgrade when a key exists), `placeholder-asset-pipeline` (the default always-available path), root README ("AI Asset Generation (optional)"), `.env.example`, `manifests/asset-providers.json`, and `manifests/README.md`. `scripts/generate-assets.js` now reports the missing key as an unavailable optional capability and points back to the placeholder commands instead of a bare error.
+
 ### Added
 - AI asset generation layer (engine-neutral): `manifests/asset-providers.json` + `schemas/asset-providers.schema.json` — the generative provider registry mirroring the `engines.json` pattern, with fal.ai as default provider (one pay-per-use key covers every modality) routing seven capabilities to current models (image: Nano Banana, skybox: equirectangular prompt contract, model3d: Tencent Hunyuan3D → GLB, sfx/speech: ElevenLabs, music: CassetteAI, video: Seedance/Kling/Veo)
 - `scripts/generate-assets.js` — zero-dependency Node client for the fal.ai queue API: resolves capability→model from the registry, supports `--dry-run`/`--seed`/`--model`/`--input-json`, downloads results to a staging directory, and writes a `.provenance.json` sidecar (provider, model, prompt, seed, request id) per run

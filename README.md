@@ -105,14 +105,25 @@ And equivalent skill / command / review layers where needed.
 
 Shared documents should describe **intent**, **ownership**, and **quality bars**. Engine-specific files should describe **implementation conventions** inside that engine only.
 
-## AI Asset Generation
-The scaffold ships an engine-neutral asset generation layer so a project can move from procedural placeholders to real content without leaving the workflow:
+## AI Asset Generation (optional)
+The scaffold ships an **optional** engine-neutral asset generation layer. It is an
+upgrade, not a dependency: the default asset workflow is unchanged, and AI generation
+only activates when a provider API key is present in the environment.
 
-1. Generate placeholders first (`/unity-placeholders`, `/godot-placeholders`, `/web-placeholders`) so every asset has a stable name and path.
-2. Run `/generate-assets` to produce real content from text prompts — images and textures, equirectangular skyboxes, 3D models (GLB), sound effects, music, voice lines, and intro/cinematic video — dropped onto the same names and paths.
+**Without a key (default).** Use the scaffold's built-in tooling exactly as always:
+the engine placeholder commands (`/unity-placeholders`, `/godot-placeholders`,
+`/web-placeholders`) and the procedural / Canvas / WebAudio pipelines. A game built
+entirely on placeholders is a complete, valid result — nothing about the workflow
+requires an API.
+
+**With a key (`FAL_KEY` for the default fal.ai provider).** `/generate-assets` becomes
+available to upgrade placeholders to real content from text prompts:
+
+1. Generate placeholders first so every asset has a stable name and path.
+2. Run `/generate-assets` to produce images and textures, equirectangular skyboxes, 3D models (GLB/OBJ), sound effects, music, voice lines, and intro/cinematic video — dropped onto those same names and paths (zero code changes).
 3. Import through the active engine layer and review with the matching pass command (`/art-2d-pass`, `/art-3d-pass`, `/audio-pass`).
 
-Capability-to-model routing lives in [manifests/asset-providers.json](manifests/asset-providers.json) (default provider: fal.ai — one pay-per-use key, set via the `FAL_KEY` environment variable, covers every modality). `scripts/generate-assets.js` performs the generation and writes a `.provenance.json` sidecar (provider, model, prompt, seed, request id) per run; assets without provenance are treated as unlicensed content. Governance rules live in [rules/common/asset-pipeline.md](rules/common/asset-pipeline.md).
+Capability-to-model routing lives in [manifests/asset-providers.json](manifests/asset-providers.json) (default provider: fal.ai — one pay-per-use key covers every modality). `scripts/generate-assets.js` performs the generation and writes a `.provenance.json` sidecar (provider, model, prompt, seed, request id) per run; assets without provenance are treated as unlicensed content. The key is read only from the `FAL_KEY` environment variable and is never committed (`.env` files are gitignored). Governance rules — including the optional-capability and fallback policy — live in [rules/common/asset-pipeline.md](rules/common/asset-pipeline.md). For a worked end-to-end example see the `samples/PrismDefense3DAssetsGen` variant.
 
 ## Intended Use Cases
 - New game project setup

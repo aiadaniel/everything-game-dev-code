@@ -28,7 +28,7 @@ The generative asset provider registry — the single source of truth for which 
 
 Each provider declares an `id`, `display` name, `queueBaseUrl` (async queue API), `apiKeyEnv` (the environment variable holding the API key — keys are never committed), `docsUrl`, and a `capabilities` map. Each capability entry declares the default `model`, optional `alternatives`, the `promptField` name, request `defaults`, and the expected `output` format. Validated against `schemas/asset-providers.schema.json`.
 
-The default provider is fal.ai because one pay-per-use key covers every asset modality. Model catalogs rotate quickly — verify model ids against the provider catalog when starting a new project.
+This layer is optional and capability-gated: it activates only when the provider's `apiKeyEnv` (e.g. `FAL_KEY`) is set in the environment. With no key, the scaffold falls back to its built-in placeholder/procedural asset tooling and behaves exactly as it did before this layer existed (see `rules/common/asset-pipeline.md`). The default provider is fal.ai because one pay-per-use key covers every asset modality. Model catalogs rotate quickly — verify model ids against the provider catalog when starting a new project.
 
 ### install-components.json
 

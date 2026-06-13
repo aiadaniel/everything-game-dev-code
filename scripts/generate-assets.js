@@ -221,7 +221,11 @@ async function main() {
   const apiKey = process.env[provider.apiKeyEnv];
   if (!apiKey) {
     fail(
-      `Environment variable ${provider.apiKeyEnv} is not set. Get a key at ${provider.docsUrl} and export it; keys are never stored in the repository.`
+      `Environment variable ${provider.apiKeyEnv} is not set, so AI asset generation is unavailable. ` +
+        `This capability is optional: without a provider key, keep using the scaffold's built-in asset tooling ` +
+        `(the engine placeholder commands — /unity-placeholders, /godot-placeholders, /web-placeholders — and ` +
+        `the procedural/Canvas/WebAudio pipelines), exactly as before. ` +
+        `To enable generation, get a key at ${provider.docsUrl} and export it as ${provider.apiKeyEnv}; keys are never stored in the repository.`
     );
   }
 

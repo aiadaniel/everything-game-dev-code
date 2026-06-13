@@ -42,6 +42,7 @@ graph LR
   s_ui_hud_patterns{{"ui-hud-patterns"}}:::skill
   s_input_abstraction{{"input-abstraction"}}:::skill
   s_placeholder_asset_pipeline{{"placeholder-asset-pipeline"}}:::skill
+  s_ai_asset_generation{{"ai-asset-generation"}}:::skill
   s_performance_budgeting{{"performance-budgeting"}}:::skill
   s_qa_test_matrix{{"qa-test-matrix"}}:::skill
   s_release_readiness{{"release-readiness"}}:::skill
@@ -105,6 +106,7 @@ graph LR
   c_full_game -.-> s_ui_hud_patterns
   c_full_game -.-> s_input_abstraction
   c_full_game -.-> s_placeholder_asset_pipeline
+  c_full_game -.-> s_ai_asset_generation
   c_full_game -.-> s_performance_budgeting
   c_full_game -.-> s_qa_test_matrix
   c_full_game -.-> s_release_readiness

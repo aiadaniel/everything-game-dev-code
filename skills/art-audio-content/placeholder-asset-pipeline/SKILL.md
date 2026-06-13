@@ -63,6 +63,7 @@ Define creation, naming, and replacement rules for placeholder assets so the gam
 
 ## Related Skills
 - generated-raster-asset-pipeline
+- ai-asset-generation
 
 ## Notes
 - Keep this skill aligned with the relevant rules layer and current project documentation.
@@ -72,3 +73,4 @@ Define creation, naming, and replacement rules for placeholder assets so the gam
 - 3D placeholders are procedural primitives (box, sphere, capsule, plane) with one flat-color material per entity category, at correct gameplay scale with matching collision so physics, navigation, and camera framing are testable before final models exist.
 - Audio placeholders should be procedurally generated (sine waves, square waves, noise, pitch sweeps) — not silent stubs. A placeholder sound that represents the intended audio event (e.g. a rising tone for a coin collect, a short burst for a jump) makes gameplay testing far more effective than silence.
 - If placeholders are later replaced with generated raster art, hand off to `generated-raster-asset-pipeline` before acceptance so transparency and runtime-size issues are caught during the swap.
+- This placeholder pipeline is the DEFAULT and always-available asset path. AI generation (`ai-asset-generation` + `/generate-assets`) is an optional upgrade that only applies when a provider API key is present; when it is absent, this pipeline is the complete workflow, unchanged. Generated assets, when used, drop onto the exact names and paths produced here.

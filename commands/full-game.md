@@ -7,7 +7,8 @@ description: Build a complete game from idea to playable build, executing every 
 ## Purpose
 Take a game idea and a target platform, then execute the full development pipeline — from
 design documents through implementation, art, audio, review, QA, and release — producing a
-playable game with real code, real assets (placeholder where needed), and real project structure.
+playable game with real code, real assets (placeholder by default, AI-generated when a
+provider key is available), and real project structure.
 
 This is not a planning command. It executes every phase, writes every file, and delivers a
 project the user can open and run.
@@ -55,6 +56,7 @@ The user provides two things:
 - ui-hud-patterns
 - input-abstraction
 - placeholder-asset-pipeline
+- ai-asset-generation
 - performance-budgeting
 - qa-test-matrix
 - release-readiness
@@ -201,6 +203,14 @@ Based on target platform:
 All placeholders must be wired — the game must be visually and audibly playable
 after this phase with no manual setup.
 
+**Placeholders are the default and always sufficient.** Optionally, if the active
+provider's API key is present in the environment (`FAL_KEY` for fal.ai), this phase
+MAY upgrade the wired placeholders to AI-generated assets via `/generate-assets`
+(see `ai-asset-generation`): generate onto the same names and paths the placeholders
+use, keep the drop-in contract, and record acceptances in `generated-assets.json`.
+If no key is present, do not attempt generation and do not treat it as a gap —
+ship the placeholders. Either way, the game must be fully playable after this phase.
+
 ---
 
 ### Phase 6 — Scene Wiring (context: production)
@@ -261,7 +271,10 @@ Produce a final message to the user with:
    - Web: `npm install && npm run dev` or just open `index.html`
 3. **What was built** — brief recap of systems, screens, and features
 4. **What placeholder assets look like** — describe what the player will see/hear
-5. **Next steps** — what the user should do to replace placeholders with real assets
+   (or, if generation ran, which assets are AI-generated and which remain placeholder)
+5. **Next steps** — what the user should do to replace placeholders with real assets,
+   including that `/generate-assets` can upgrade them in place once a provider key
+   (`FAL_KEY`) is set, if it was not available during this run
 
 ---
 

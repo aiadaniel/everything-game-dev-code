@@ -43,6 +43,8 @@ These rules are engine-neutral. Engine-specific importer settings and folder con
 - Replacing a shared asset must trigger impact review for all known consumers.
 
 ## AI-Generated Asset Rules
+- AI generation is an OPTIONAL capability, never a dependency. It is gated on the active provider's API key existing in the environment (`apiKeyEnv`, e.g. `FAL_KEY`). When no key is present, the asset workflow falls back to the scaffold's built-in tooling — the engine placeholder commands and the procedural/Canvas/WebAudio pipelines (`placeholder-asset-pipeline`) — and behaves exactly as it did before this capability existed. A project built entirely on placeholders is valid; generation is an enhancement.
+- Never fabricate, hand-place, or substitute assets to stand in for an unavailable API. The fallback is the placeholder pipeline, not improvised content.
 - Generation must go through the provider registry (`manifests/asset-providers.json`); model ids must not be hardcoded in project code or docs.
 - Generation is engine-neutral: outputs land in neutral formats (PNG, GLB, MP3/WAV, MP4) in a staging area, and engine import follows the active engine layer only.
 - Every generated file must keep a provenance record (provider, model, prompt, seed, request id, timestamp) — an asset without provenance is treated as unlicensed third-party content.

@@ -11,6 +11,19 @@ so a project can upgrade from procedural placeholders to real content without
 leaving the scaffold. Generation is engine-neutral; import stays in the active
 engine layer.
 
+## Capability Gate (read first)
+This command is an **optional upgrade**, not a dependency. It is available only when
+the active provider's API key exists in the environment (`FAL_KEY` for the default
+fal.ai provider). Decide before doing anything else:
+
+- **Key present** → AI generation is available; proceed with this command.
+- **Key absent** → AI generation is unavailable. Do not block, fabricate assets, or
+  treat it as an error. Fall back to the scaffold's built-in asset tooling exactly
+  as before this capability existed: the engine placeholder commands
+  (`/unity-placeholders`, `/godot-placeholders`, `/web-placeholders`) and the
+  procedural / Canvas / WebAudio pipelines via `placeholder-asset-pipeline`. Tell
+  the user the API path is available if they set a key, then continue with placeholders.
+
 ## Use When
 - placeholder assets exist and the project is ready for real visuals, audio, or video
 - a specific asset is missing and no artist is available: a sprite, a tileable
@@ -42,8 +55,9 @@ engine layer.
 
 ## Notes
 - The API key comes from the provider's `apiKeyEnv` environment variable (`FAL_KEY`
-  for fal.ai); it is never committed. Without a key, stop and report — do not fall
-  back to fabricating assets.
+  for fal.ai); it is never committed. Without a key, the capability is simply
+  unavailable — fall back to the scaffold's placeholder/procedural tooling (see the
+  Capability Gate above); never fabricate or hand-place assets as a substitute.
 - Always `--dry-run` first; for video (the most expensive capability) confirm cost
   expectations with the user before batch generation.
 - Use a fixed `--seed` while iterating so accepted prompts are reproducible.

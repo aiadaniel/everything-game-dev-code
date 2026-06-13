@@ -14,6 +14,24 @@ procedural placeholders to real content without leaving the scaffold — while
 keeping generation engine-neutral, reproducible, provenance-tracked, and subject
 to the same acceptance gates as authored content.
 
+## Optional Capability — Gate Before Use
+AI generation is an optional layer, not a dependency. It is available only when the
+active provider's API key is set in the environment (`FAL_KEY` for the default
+fal.ai provider). The scaffold's asset workflow does not require it:
+
+- **Key present** → this skill is available; the project may upgrade placeholders to
+  generated content.
+- **Key absent** → this skill is inert. Fall back to the default scaffold tooling
+  exactly as before the capability existed — `placeholder-asset-pipeline` and the
+  engine placeholder commands (`/unity-placeholders`, `/godot-placeholders`,
+  `/web-placeholders`) for sprites, 3D primitives, and procedural audio. A project
+  built entirely on placeholders is a fully valid, shippable-to-prototype outcome;
+  generation is an enhancement, never a gate.
+
+Detecting the gate is cheap: the generator (`scripts/generate-assets.js`) reads the
+key from the environment and reports clearly when it is missing, pointing back to
+the placeholder path. Never fabricate or hand-place assets to "stand in" for the API.
+
 ## Use When
 - placeholder assets exist and the project is ready to upgrade them to real content
 - a game needs images, textures, skyboxes, 3D models, sound effects, music, voice

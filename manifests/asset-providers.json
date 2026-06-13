@@ -1,7 +1,7 @@
 {
   "$schema": "../schemas/asset-providers.schema.json",
   "version": 1,
-  "description": "Generative asset provider registry — the single source of truth for which AI generation provider and model serves each asset capability. scripts/generate-assets.js resolves capability-to-model routing from this file; swapping a default model or adding a provider is a manifest edit, not a code edit. Model catalogs rotate quickly: verify a model id against the provider catalog before relying on it in a new project.",
+  "description": "Generative asset provider registry — the single source of truth for which AI generation provider and model serves each asset capability. This whole layer is OPTIONAL: it activates only when a provider's apiKeyEnv is set in the environment; without a key the scaffold uses its built-in placeholder/procedural asset tooling as the default (see rules/common/asset-pipeline.md). scripts/generate-assets.js resolves capability-to-model routing from this file; swapping a default model or adding a provider is a manifest edit, not a code edit. Model catalogs rotate quickly: verify a model id against the provider catalog before relying on it in a new project.",
   "defaultProvider": "fal",
   "providers": [
     {
