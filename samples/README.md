@@ -222,4 +222,6 @@ Third pass: two selectable levels. `LEVELS` in `sim/config.js` owns per-level pa
 
 Every visual and audio asset is AI-generated through `manifests/asset-providers.json` (fal.ai) via `scripts/generate-assets.js`: seven Hunyuan3D models (ship, Force, boss, four enemies) from a concept-image → Rapid image-to-3D pipeline, a nano-banana-pro menu key-art still, a Seedance **image-to-video** intro cinematic playing behind the menu, a parallax nebula backdrop, ten ElevenLabs sound effects, and a CassetteAI battle-music loop. Each asset carries a `.provenance.json` sidecar; raster acceptances live in `generated-assets.json`. Models swap onto the live primitives in place, so the game is fully playable on flat-color placeholders with zero generated files present — generation is the optional upgrade gated by the cost-confirmation policy (`rules/common/asset-pipeline.md`).
 
+**Deployed:** http://51.75.26.136/nebula-lance/
+
 **Run:** `cd samples/NebulaLance && npm install && npm run dev` (`npm run smoke` for the headless sim test, `npm run build` for the static `dist/`)
