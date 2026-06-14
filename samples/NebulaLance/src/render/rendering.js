@@ -55,18 +55,27 @@ const MODELS = {
 export function createRendering(canvas) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, DPR_CAP));
+  // Filmic tone map + slight over-exposure so the dark biomechanical models and
+  // neon accents read brightly (the generated diffuse maps are quite dark).
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.5;
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x05070f);
-  scene.fog = new THREE.Fog(0x05070f, 26, 46);
+  scene.fog = new THREE.Fog(0x05070f, 30, 52);
 
   const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
 
-  scene.add(new THREE.HemisphereLight(0x9fd8ff, 0x241a30, 1.5));
-  const key = new THREE.DirectionalLight(0xffffff, 1.6);
-  key.position.set(-3, 4, 8);
+  // Bright, multi-direction rig so models are lit from front and sides.
+  scene.add(new THREE.AmbientLight(0xaebcd8, 0.9));
+  scene.add(new THREE.HemisphereLight(0xbfe4ff, 0x46324f, 2.4));
+  const key = new THREE.DirectionalLight(0xffffff, 3.0);
+  key.position.set(-3, 4, 9);
   scene.add(key);
-  const rim = new THREE.PointLight(0xff4dd2, 30, 30);
+  const fill = new THREE.DirectionalLight(0xbfe0ff, 1.6);
+  fill.position.set(4, -2, 7);
+  scene.add(fill);
+  const rim = new THREE.PointLight(0xff4dd2, 55, 34);
   rim.position.set(6, 0, 6);
   scene.add(rim);
 
@@ -177,7 +186,12 @@ export function createRendering(canvas) {
         const map = texLoader.load(tex, () => {}, undefined, () => {});
         map.colorSpace = THREE.SRGBColorSpace;
         textures.push(map);
-        const material = mat(new THREE.MeshStandardMaterial({ map, color: 0xffffff, roughness: 0.7, metalness: 0.2 }));
+        // Emissive lift (uses the same diffuse map) so the dark generated albedo
+        // never falls to pure black under the lights.
+        const material = mat(new THREE.MeshStandardMaterial({
+          map, color: 0xffffff, roughness: 0.6, metalness: 0.25,
+          emissive: 0xffffff, emissiveMap: map, emissiveIntensity: 0.35,
+        }));
         onReady(geo(g), material);
       },
       undefined,
@@ -186,7 +200,7 @@ export function createRendering(canvas) {
   }
 
   // ---------- player ship ----------
-  const shipMat = mat(new THREE.MeshStandardMaterial({ color: COLORS.player, emissive: 0x0d3d38, roughness: 0.4, metalness: 0.5 }));
+  const shipMat = mat(new THREE.MeshStandardMaterial({ color: COLORS.player, emissive: 0x1e7a6f, emissiveIntensity: 0.8, roughness: 0.4, metalness: 0.5 }));
   const shipGeo = geo(new THREE.ConeGeometry(0.34, 0.95, 16));
   shipGeo.rotateZ(-Math.PI / 2); // point +x
   const ship = new THREE.Mesh(shipGeo, shipMat);
