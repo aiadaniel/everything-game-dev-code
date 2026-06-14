@@ -38,12 +38,16 @@
         },
         "model3d": {
           "model": "fal-ai/hunyuan3d-v3/text-to-3d",
-          "alternatives": ["fal-ai/hunyuan-3d/v3.1/rapid/image-to-3d"],
+          "alternatives": [
+            "fal-ai/hunyuan-3d/v3.1/rapid/image-to-3d",
+            "fal-ai/trellis-2",
+            "fal-ai/triposr"
+          ],
           "promptField": "prompt",
           "defaults": {},
           "output": "glb",
           "estCostUsd": 0.3,
-          "notes": "Tencent Hunyuan3D. GLB output imports into Unity, Unreal, Godot, and Three.js without conversion. Use the image-to-3d variant to lift accepted concept art into 3D. Static meshes only — rigging/animation needs a dedicated provider."
+          "notes": "The default is text-to-3d so a bare --prompt works, but the PROVEN production route is concept-image -> image-to-3d (text-to-3d queues can stall): generate a concept with the image capability, then pass --model fal-ai/hunyuan-3d/v3.1/rapid/image-to-3d --input-json {\"input_image_url\": ...} (this Rapid endpoint returns OBJ+MTL+texture, not GLB). Use fal-ai/trellis-2 (~$0.25-0.35) when you need PBR materials (metalness/roughness) from one image; fal-ai/triposr (~$0.07, <0.5s) for fast low-stakes ideation. All import into Unity/Unreal/Godot/Three.js. Static meshes only — rigging/animation needs a dedicated provider."
         },
         "sfx": {
           "model": "fal-ai/elevenlabs/sound-effects/v2",
@@ -76,6 +80,7 @@
           "model": "fal-ai/bytedance/seedance/v1/pro/text-to-video",
           "alternatives": [
             "fal-ai/bytedance/seedance/v1/pro/image-to-video",
+            "wan/v2.6/image-to-video",
             "bytedance/seedance-2.0/image-to-video",
             "fal-ai/veo3"
           ],
@@ -83,7 +88,7 @@
           "defaults": { "duration": "5", "aspect_ratio": "16:9" },
           "output": "mp4",
           "estCostUsd": 1.2,
-          "notes": "Intro videos, cinematics, trailers. Image-to-video (the first alternative; pass image_url via --input-json) gives more art-directed control than pure text-to-video. Seedance 2.0 and Veo 3 generate audio natively. Video is the most expensive capability — always dry-run and estimate before batch runs."
+          "notes": "Intro videos, cinematics, trailers. Image-to-video (pass image_url via --input-json) gives more art-directed control than pure text-to-video. Cheapest path: wan/v2.6/image-to-video (~$0.05/s 720p, so a 5s clip is ~$0.25 vs ~$1.20 on Seedance Pro) — set --confirm-over accordingly, or use it to stay under the gate. Seedance 2.0 and Veo 3 generate audio natively and cost the most. Video is the most expensive capability — always dry-run and estimate before batch runs."
         }
       }
     }
