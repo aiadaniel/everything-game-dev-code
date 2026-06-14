@@ -212,3 +212,14 @@ Third pass: two selectable levels. `LEVELS` in `sim/config.js` owns per-level pa
 **Deployed:** http://51.75.26.136/prism-defense-gen/ (the original variants remain at `/prism-defense/`)
 
 **Run:** `cd samples/PrismDefense3DAssetsGen && npm install && npm run dev` (`npm run smoke` still passes — the sim is untouched)
+
+## NebulaLance
+
+**Genre:** 2.5D side-scrolling shoot-'em-up (R-Type homage)
+**Platform:** Web (HTML5 — Three.js + Vite, ES modules)
+**Harness:** Claude Code (June 2026), built by one `/full-game` run with the `/generate-assets` layer
+**Features:** A horizontal auto-scrolling shmup with the two R-Type signatures — the **Wave Cannon** (hold FIRE to charge a piercing beam whose damage scales with charge) and the **Force** pod (a detachable, invulnerable orbital drone that attaches front/rear, blocks enemy fire, launches/recalls, and cycles spread/laser/homing weapons). One authored stage rises from trash-mob waves through a closing-corridor turret gauntlet to a three-phase boss, **THE MAW**, whose only weak point is a destructible glowing core per phase. Four enemy archetypes (gunner/weaver/carrier/turret) + boss minions, four power-ups (force/power/speed/shield), combo multiplier, 3 lives, localStorage high score. Mobile-first: finger-follow movement + on-screen FIRE/FORCE/LAUNCH buttons, plus full keyboard. Strict sim/render split on a fixed timestep with a headless sim smoke test (`npm run smoke` asserts a lose path and an auto-aim bot clearing all three boss phases), instanced rendering, and GPU memory flat across restarts (verified: 18 geometries / textures / programs constant).
+
+Every visual and audio asset is AI-generated through `manifests/asset-providers.json` (fal.ai) via `scripts/generate-assets.js`: seven Hunyuan3D models (ship, Force, boss, four enemies) from a concept-image → Rapid image-to-3D pipeline, a nano-banana-pro menu key-art still, a Seedance **image-to-video** intro cinematic playing behind the menu, a parallax nebula backdrop, ten ElevenLabs sound effects, and a CassetteAI battle-music loop. Each asset carries a `.provenance.json` sidecar; raster acceptances live in `generated-assets.json`. Models swap onto the live primitives in place, so the game is fully playable on flat-color placeholders with zero generated files present — generation is the optional upgrade gated by the cost-confirmation policy (`rules/common/asset-pipeline.md`).
+
+**Run:** `cd samples/NebulaLance && npm install && npm run dev` (`npm run smoke` for the headless sim test, `npm run build` for the static `dist/`)

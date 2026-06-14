@@ -716,6 +716,92 @@ everything-game-dev-code
 │   │   ├── index.html
 │   │   ├── package.json
 │   │   └── TDD.md
+│   ├── NebulaLance
+│   │   ├── public
+│   │   │   └── assets
+│   │   │       ├── audio
+│   │   │       │   ├── music-battle.provenance.json
+│   │   │       │   ├── music-battle.wav
+│   │   │       │   ├── sfx-beam.mp3
+│   │   │       │   ├── sfx-beam.provenance.json
+│   │   │       │   ├── sfx-death.mp3
+│   │   │       │   ├── sfx-death.provenance.json
+│   │   │       │   ├── sfx-explosion.mp3
+│   │   │       │   ├── sfx-explosion.provenance.json
+│   │   │       │   ├── sfx-force.mp3
+│   │   │       │   ├── sfx-force.provenance.json
+│   │   │       │   ├── sfx-hit.mp3
+│   │   │       │   ├── sfx-hit.provenance.json
+│   │   │       │   ├── sfx-lose.mp3
+│   │   │       │   ├── sfx-lose.provenance.json
+│   │   │       │   ├── sfx-powerup.mp3
+│   │   │       │   ├── sfx-powerup.provenance.json
+│   │   │       │   ├── sfx-shot.mp3
+│   │   │       │   ├── sfx-shot.provenance.json
+│   │   │       │   ├── sfx-warning.mp3
+│   │   │       │   ├── sfx-warning.provenance.json
+│   │   │       │   ├── sfx-win.mp3
+│   │   │       │   └── sfx-win.provenance.json
+│   │   │       ├── img
+│   │   │       │   ├── menu-keyart.png
+│   │   │       │   ├── menu-keyart.provenance.json
+│   │   │       │   ├── nebula.png
+│   │   │       │   └── nebula.provenance.json
+│   │   │       ├── models
+│   │   │       │   ├── boss-tex.jpg
+│   │   │       │   ├── boss.obj
+│   │   │       │   ├── boss.provenance.json
+│   │   │       │   ├── enemy-carrier-tex.jpg
+│   │   │       │   ├── enemy-carrier.obj
+│   │   │       │   ├── enemy-carrier.provenance.json
+│   │   │       │   ├── enemy-gunner-tex.jpg
+│   │   │       │   ├── enemy-gunner.obj
+│   │   │       │   ├── enemy-gunner.provenance.json
+│   │   │       │   ├── enemy-turret-tex.jpg
+│   │   │       │   ├── enemy-turret.obj
+│   │   │       │   ├── enemy-turret.provenance.json
+│   │   │       │   ├── enemy-weaver-tex.jpg
+│   │   │       │   ├── enemy-weaver.obj
+│   │   │       │   ├── enemy-weaver.provenance.json
+│   │   │       │   ├── force-tex.jpg
+│   │   │       │   ├── force.obj
+│   │   │       │   ├── force.provenance.json
+│   │   │       │   ├── ship-tex.jpg
+│   │   │       │   ├── ship.obj
+│   │   │       │   └── ship.provenance.json
+│   │   │       └── video
+│   │   │           ├── intro.mp4
+│   │   │           └── intro.provenance.json
+│   │   ├── scripts
+│   │   │   └── sim-smoke.mjs
+│   │   ├── src
+│   │   │   ├── audio
+│   │   │   │   └── audio.js
+│   │   │   ├── core
+│   │   │   │   ├── events.js
+│   │   │   │   └── loop.js
+│   │   │   ├── input
+│   │   │   │   └── input.js
+│   │   │   ├── render
+│   │   │   │   └── rendering.js
+│   │   │   ├── save
+│   │   │   │   └── storage.js
+│   │   │   ├── sim
+│   │   │   │   ├── config.js
+│   │   │   │   └── sim-game.js
+│   │   │   ├── ui
+│   │   │   │   ├── hud.js
+│   │   │   │   └── screens.js
+│   │   │   ├── main.js
+│   │   │   └── style.css
+│   │   ├── .gitignore
+│   │   ├── GDD.md
+│   │   ├── generated-assets.json
+│   │   ├── index.html
+│   │   ├── package-lock.json
+│   │   ├── package.json
+│   │   ├── TDD.md
+│   │   └── vite.config.js
 │   ├── pacmanAI
 │   │   ├── src
 │   │   │   ├── entities

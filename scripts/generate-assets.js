@@ -80,6 +80,10 @@ function parseArgs(argv) {
       args.dryRun = true;
       continue;
     }
+    if (key === "yes") {
+      args.yes = true;
+      continue;
+    }
     const value = argv[i + 1];
     if (value === undefined || value.startsWith("--")) {
       fail(`Option --${key} requires a value.`);
