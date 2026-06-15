@@ -295,6 +295,18 @@
         "@playwright/mcp@latest"
       ],
       "enabled": true
+    },
+    "unity-editor": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "--from",
+        "mcpforunityserver",
+        "mcp-for-unity",
+        "--transport",
+        "stdio"
+      ],
+      "enabled": true
     }
   }
 }

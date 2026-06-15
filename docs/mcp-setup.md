@@ -30,7 +30,7 @@ those two commands.
 | Tool | Gives you | Needed by | Install |
 |---|---|---|---|
 | Node.js 18+ | `npx` | `fal-media`, `playwright` | Likely already installed (`node -v`); else [nodejs.org](https://nodejs.org) |
-| uv | `uvx` | `blender` | `winget install astral-sh.uv` (Windows) · `curl -LsSf https://astral.sh/uv/install.sh \| sh` (macOS/Linux) · or `pip install uv` |
+| uv | `uvx` | `blender`, `unity-editor` | `winget install astral-sh.uv` (Windows) · `curl -LsSf https://astral.sh/uv/install.sh \| sh` (macOS/Linux) · or `pip install uv` |
 
 > **If a server won't start, it's almost always PATH.** The harness launches
 > `uvx`/`npx` itself, so they must be resolvable in its environment. Check with
@@ -77,6 +77,7 @@ tools actually *work*, each server needs one more thing:
 | `playwright` | Drives a real browser to playtest/QA web (HTML5) builds | First run only: `npx playwright install chromium`. Point it at a running dev/preview server, not a `file://` path | — |
 | `fal-media` | Generates images, 3D, audio, video via fal.ai | A fal.ai key in the `FAL_KEY` environment variable | `FAL_KEY` |
 | `blender` | Inspects a Blender scene and runs `bpy` Python (geometry, export, validation) | **Blender open** with the BlenderMCP add-on **server started** — see the walkthrough below | — |
+| `unity-editor` | Drives the Unity Editor (scenes, GameObjects, assets, console, C#) | **Unity Editor open** with the MCP for Unity bridge package installed — see the Unity note below | — |
 
 Secrets are never written into the configs — env values are emitted as `${VAR}`
 and read from your environment at launch. Set `FAL_KEY` in your shell/harness
@@ -131,6 +132,26 @@ register. (To use Blender outside this repo too, register it globally once:
    starts; the live link to Blender happens on the first tool call.
 3. With Blender open and its add-on server running, try a prompt like *"list the
    objects in the Blender scene"* or *"create a 2 m cube at the origin"*.
+
+## Unity MCP (engine control)
+
+`unity-editor` follows the same two-halves pattern as Blender: the harness side
+is **already wired**, but it needs the **Unity Editor open with the MCP for Unity
+bridge installed** so the server has something to drive. It lets the assistant
+build/rewire scenes, manage assets, run menu items, read the console, and
+edit/run C# directly in the Editor.
+
+1. **Install the bridge in your Unity project** (one-time): Unity → **Window →
+   Package Manager → + → Add package from git URL**, paste
+   `https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main`. The
+   in-Editor wizard checks Python + uv and can configure detected MCP clients.
+2. **Install `uv`** if you haven't (see [Prerequisites](#prerequisites)); the
+   server launches via `uvx --from mcpforunityserver mcp-for-unity`.
+3. **Keep the Editor open**, reload your harness, and try *"list the GameObjects
+   in the open Unity scene"*.
+
+Prereqs: Unity 2021.3 LTS+ and Python 3.10+ with uv. This server is
+Unity-specific — it does nothing for Unreal/Godot/web projects.
 
 ## Troubleshooting
 

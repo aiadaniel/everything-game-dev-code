@@ -19,7 +19,8 @@
       "unity-docs",
       "unity-package-registry",
       "issue-tracker",
-      "blender"
+      "blender",
+      "unity-editor"
     ],
     "unreal": [
       "filesystem",
@@ -338,6 +339,34 @@
         "Interactive only — needs Blender open with the BlenderMCP addon running (not headless); like fal-media and playwright it is an iteration layer, not a CI/deterministic path.",
         "Scope: geometry, normalization, import validation, and export are solid. Rigging and character animation are only assisted (auto-rig, retarget, clip cleanup) — precise bone placement, weight painting, and keyframe timing still need a human. Do not present it as an autonomous rigger/animator.",
         "Pairs with skills 3d-asset-pipeline, rigging-skinning-pipeline, 3d-animation-pipeline, lighting-lod-pipeline and the /art-3d-pass command; follow rules/common/asset-pipeline.md for any AI-generated source."
+      ]
+    },
+    "unity-editor": {
+      "category": "engine-control",
+      "enabled_by_default": false,
+      "recommended": true,
+      "purpose": "Drive the Unity Editor from the assistant via MCP for Unity (CoplayDev): inspect and modify scenes and GameObjects, manage and import assets, run Editor menu items, read the console, and edit/run C# — so scene scaffolding and audits act directly in the Editor instead of hand-editing YAML.",
+      "when_to_use": [
+        "scaffold or rewire a scene live in the Editor (create GameObjects, set components/references) instead of editing .unity/.prefab YAML by hand",
+        "audit scene/prefab structure and serialized references against the unity rules while the project is open",
+        "run Editor menu items, trigger imports, or read the console while diagnosing a build or import",
+        "apply a unity-setup/scene-bootstrap result directly to the open project"
+      ],
+      "transport": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcpforunityserver",
+        "mcp-for-unity",
+        "--transport",
+        "stdio"
+      ],
+      "env": {},
+      "notes": [
+        "Two halves like the Blender MCP: install the Unity-side bridge in your project (Package Manager -> Add package from git URL: https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main) and keep the Unity Editor open; the harness launches this server (PyPI package mcpforunityserver) which connects to it.",
+        "Prereqs: Unity 2021.3 LTS+, Python 3.10+ with uv (provides uvx). First run downloads mcpforunityserver from PyPI.",
+        "Engine-specific (engine-control): use only inside Unity work; it does not apply to Unreal/Godot/web. Keep Unity implementation detail in the Unity rules layer.",
+        "Pairs with the unity-setup, scene-bootstrap, unity-scene-audit, and unity-review commands. Distinct from unity-docs / unity-package-registry, which are documentation servers, not Editor control."
       ]
     },
     "playwright": {

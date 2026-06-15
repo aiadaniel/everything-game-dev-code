@@ -22,6 +22,16 @@
         "-y",
         "@playwright/mcp@latest"
       ]
+    },
+    "unity-editor": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcpforunityserver",
+        "mcp-for-unity",
+        "--transport",
+        "stdio"
+      ]
     }
   }
 }

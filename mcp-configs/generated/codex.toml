@@ -15,3 +15,7 @@ FAL_KEY = "${FAL_KEY}"
 [mcp_servers.playwright]
 command = "npx"
 args = ["-y", "@playwright/mcp@latest"]
+
+[mcp_servers.unity-editor]
+command = "uvx"
+args = ["--from", "mcpforunityserver", "mcp-for-unity", "--transport", "stdio"]

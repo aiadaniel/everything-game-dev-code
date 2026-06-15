@@ -35,6 +35,7 @@ generated from the same catalog so they always match.
 - `blender` — Drive a running Blender instance to inspect scenes and run bpy Python for 3D asset work: build/normalize geometry, set scale/axis/pivot, assign materials, pull PolyHaven/Sketchfab assets, validate against import rules, and export GLB/FBX.
 - `fal-media` — Interactive AI asset generation via the fal.ai model catalog: images, skyboxes, 3D models, sound effects, music, speech, and video.
 - `playwright` — Drive a real browser to playtest and QA web (HTML5) builds: navigate, click/drag/type, capture screenshots, and read console + page errors.
+- `unity-editor` — Drive the Unity Editor from the assistant via MCP for Unity (CoplayDev): inspect and modify scenes and GameObjects, manage and import assets, run Editor menu items, read the console, and edit/run C# — so scene scaffolding and audits act directly in the Editor instead of hand-editing YAML.
 
 Env values are emitted as `${VAR}` so secrets are read from your environment at
 launch and never written to disk. Set the variable (e.g. `FAL_KEY`) before use.
@@ -45,6 +46,7 @@ launch and never written to disk. Set the variable (e.g. `FAL_KEY`) before use.
 codex mcp add blender -- uvx blender-mcp
 codex mcp add fal-media -- npx -y fal-ai-mcp-server
 codex mcp add playwright -- npx -y @playwright/mcp@latest
+codex mcp add unity-editor -- uvx --from mcpforunityserver mcp-for-unity --transport stdio
 ```
 
 ## Configure per team (not generated)
