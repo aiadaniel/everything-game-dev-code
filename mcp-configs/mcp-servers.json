@@ -18,7 +18,8 @@
       "fetch-docs",
       "unity-docs",
       "unity-package-registry",
-      "issue-tracker"
+      "issue-tracker",
+      "blender"
     ],
     "unreal": [
       "filesystem",
@@ -27,7 +28,8 @@
       "ripgrep",
       "fetch-docs",
       "unreal-docs",
-      "issue-tracker"
+      "issue-tracker",
+      "blender"
     ],
     "godot": [
       "filesystem",
@@ -36,7 +38,8 @@
       "ripgrep",
       "fetch-docs",
       "godot-docs",
-      "issue-tracker"
+      "issue-tracker",
+      "blender"
     ],
     "web": [
       "filesystem",
@@ -45,7 +48,8 @@
       "ripgrep",
       "fetch-docs",
       "issue-tracker",
-      "playwright"
+      "playwright",
+      "blender"
     ],
     "liveops": [
       "filesystem",
@@ -310,6 +314,30 @@
       "notes": [
         "Optional convenience layer. Reproducible production generation goes through scripts/generate-assets.js and manifests/asset-providers.json so provenance sidecars are written.",
         "Follow the AI-generated asset rules in rules/common/asset-pipeline.md regardless of which path generated the file."
+      ]
+    },
+    "blender": {
+      "category": "dcc-tool",
+      "enabled_by_default": false,
+      "recommended": true,
+      "purpose": "Drive a running Blender instance to inspect scenes and run bpy Python for 3D asset work: build/normalize geometry, set scale/axis/pivot, assign materials, pull PolyHaven/Sketchfab assets, validate against import rules, and export GLB/FBX.",
+      "when_to_use": [
+        "normalize a generated or downloaded model to the project's unit/axis/pivot and naming conventions before it reaches a scene",
+        "run the 3d-asset-pipeline import checklist (scale probe, orientation, pivot, polycount) and report pass/fail",
+        "kitbash modular pieces with snapping pivots, or pull HDRIs/textures from PolyHaven",
+        "clean up and re-export existing rigs/animations (rename actions, trim ranges, fix framerate, assisted retarget)"
+      ],
+      "transport": "stdio",
+      "command": "uvx",
+      "args": [
+        "blender-mcp"
+      ],
+      "env": {},
+      "notes": [
+        "DCC tool, engine-neutral: it produces GLB/FBX that each engine layer imports under its own rules, so it does not break engine isolation.",
+        "Interactive only — needs Blender open with the BlenderMCP addon running (not headless); like fal-media and playwright it is an iteration layer, not a CI/deterministic path.",
+        "Scope: geometry, normalization, import validation, and export are solid. Rigging and character animation are only assisted (auto-rig, retarget, clip cleanup) — precise bone placement, weight painting, and keyframe timing still need a human. Do not present it as an autonomous rigger/animator.",
+        "Pairs with skills 3d-asset-pipeline, rigging-skinning-pipeline, 3d-animation-pipeline, lighting-lod-pipeline and the /art-3d-pass command; follow rules/common/asset-pipeline.md for any AI-generated source."
       ]
     },
     "playwright": {

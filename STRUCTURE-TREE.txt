@@ -486,6 +486,11 @@ everything-game-dev-code
 │   ├── install-profiles.json
 │   └── README.md
 ├── mcp-configs
+│   ├── generated
+│   │   ├── codex.toml
+│   │   ├── mcp.json
+│   │   ├── opencode.mcp.json
+│   │   └── README.md
 │   └── mcp-servers.json
 ├── plugins
 │   └── README.md
@@ -1204,6 +1209,7 @@ everything-game-dev-code
 │   ├── generate-assets.js
 │   ├── generate-dependency-graph.js
 │   ├── generate-hook-wiring.js
+│   ├── generate-mcp-configs.js
 │   ├── generate-wrappers.js
 │   ├── install-profile.js
 │   ├── lint-markdown.js
