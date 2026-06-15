@@ -4,6 +4,9 @@ All notable changes to this scaffold should be documented here.
 
 ## Unreleased
 
+### Fixed
+- NebulaLance ship orientation: the generated ship model (authored in a 3/4 concept view) imported facing the wrong way; it now always faces forward (+x, toward the enemies) and only pitches up/down with vertical movement, via a tuned base rotation (`SHIP_BASE_ROT`, nose→+x) plus a pitch term. The placeholder cone was aligned to the same native +y facing so both orient identically.
+
 ### Added
 - `playwright` MCP server (Microsoft official, `@playwright/mcp`) in `mcp-configs/mcp-servers.json`, added to the `web` and `release` profiles: an optional interactive layer for Claude to playtest/QA web (HTML5) builds in a real browser — navigate, interact, screenshot, and read console/page errors — the work the samples currently do via a hand-run Playwright script. Disabled by default; each sample still keeps its reproducible headless smoke path. Browser-only (use an engine MCP for editor control).
 - Quality/price tier selector for AI asset generation. The registry gained `defaultQuality` (default `balanced`) and a per-capability `byQuality` map (`budget` / `balanced` / `premium` → model id + per-output cost); the schema enforces both. `scripts/generate-assets.js` resolves `--quality` (or `ASSET_GEN_QUALITY`, or `defaultQuality`), prints the chosen tier, estimates from its cost, and records it in the provenance sidecar; an explicit `--model` still overrides. The cost gate composes on top — budget can keep a whole video run under the threshold (Wan ~$0.25) while premium crosses it (Veo 3 ~$2.00). The agent asks the user "quality or price?" once before a batch: documented in `rules/common/asset-pipeline.md`, `/generate-assets`, the `ai-asset-generation` skill, `/full-game` Phase 5, README, `.env.example`, and the manifests/scripts READMEs. Rough spread: a full asset pass ~$2-3 budget / ~$5-7 balanced / ~$10+ premium.

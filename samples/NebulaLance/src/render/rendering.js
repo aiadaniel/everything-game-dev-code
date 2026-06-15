@@ -26,6 +26,12 @@ import {
 
 const DPR_CAP = 2;
 
+// Base orientation for the generated ship model so its nose faces +x (forward),
+// showing its top face for a clean 2.5D read; runtime adds only a pitch about z
+// from vertical movement (nose up when flying up). Tuned visually.
+const SHIP_BASE_ROT = { x: 0, y: 0, z: (-3 * Math.PI) / 4 };
+const SHIP_PITCH = 0.3;
+
 const COLORS = {
   player: 0x49e0c8,
   force: 0xff4dd2,
@@ -43,7 +49,7 @@ function modelDef(name, height) {
   return { url: `./assets/models/${name}.obj`, tex: `./assets/models/${name}-tex.jpg`, height };
 }
 const MODELS = {
-  player: modelDef('ship', 0.95),
+  player: { ...modelDef('ship', 0.95), noAutoFace: true },
   force: modelDef('force', 0.9),
   boss: modelDef('boss', 4.0),
   gunner: modelDef('enemy-gunner', 0.8),
@@ -158,7 +164,7 @@ export function createRendering(canvas) {
   }, undefined, () => {});
 
   // ---------- model upgrade helper ----------
-  function loadModel({ url, tex, height }, onReady) {
+  function loadModel({ url, tex, height, noAutoFace }, onReady) {
     objLoader.load(
       url,
       (group) => {
@@ -181,8 +187,9 @@ export function createRendering(canvas) {
         g.computeBoundingBox();
         const bb = g.boundingBox;
         g.translate(-(bb.min.x + bb.max.x) / 2, -(bb.min.y + bb.max.y) / 2, -(bb.min.z + bb.max.z) / 2);
-        // Models authored facing camera; turn to face +x (forward).
-        g.rotateY(Math.PI / 2);
+        // Most models were authored facing the camera; turn to face +x (forward).
+        // The ship sets its own orientation at runtime (noAutoFace).
+        if (!noAutoFace) g.rotateY(Math.PI / 2);
         const map = texLoader.load(tex, () => {}, undefined, () => {});
         map.colorSpace = THREE.SRGBColorSpace;
         textures.push(map);
@@ -201,8 +208,9 @@ export function createRendering(canvas) {
 
   // ---------- player ship ----------
   const shipMat = mat(new THREE.MeshStandardMaterial({ color: COLORS.player, emissive: 0x1e7a6f, emissiveIntensity: 0.8, roughness: 0.4, metalness: 0.5 }));
+  // Cone nose is +Y by default — same native facing as the generated ship model,
+  // so SHIP_BASE_ROT orients the placeholder and the model identically.
   const shipGeo = geo(new THREE.ConeGeometry(0.34, 0.95, 16));
-  shipGeo.rotateZ(-Math.PI / 2); // point +x
   const ship = new THREE.Mesh(shipGeo, shipMat);
   scene.add(ship);
   loadModel(MODELS.player, (g, m) => { ship.geometry = g; ship.material = m; });
@@ -437,7 +445,8 @@ export function createRendering(canvas) {
       ship.visible = p.alive;
       // blink during invulnerability
       if (p.invuln > 0) ship.visible = p.alive && Math.floor(timeSec * 18) % 2 === 0;
-      ship.rotation.z = sim.moveY * -0.25;
+      // Ship always faces forward (+x); only pitches up/down with vertical movement.
+      ship.rotation.set(SHIP_BASE_ROT.x, SHIP_BASE_ROT.y, SHIP_BASE_ROT.z + sim.moveY * SHIP_PITCH);
 
       // charge glow
       const charge = sim.chargeLevel();
