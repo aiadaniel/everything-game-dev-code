@@ -12,6 +12,10 @@ args = ["-y", "fal-ai-mcp-server"]
 [mcp_servers.fal-media.env]
 FAL_KEY = "${FAL_KEY}"
 
+[mcp_servers.godot-editor]
+command = "npx"
+args = ["-y", "@coding-solo/godot-mcp"]
+
 [mcp_servers.playwright]
 command = "npx"
 args = ["-y", "@playwright/mcp@latest"]

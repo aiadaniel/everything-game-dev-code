@@ -34,6 +34,7 @@ generated from the same catalog so they always match.
 
 - `blender` — Drive a running Blender instance to inspect scenes and run bpy Python for 3D asset work: build/normalize geometry, set scale/axis/pivot, assign materials, pull PolyHaven/Sketchfab assets, validate against import rules, and export GLB/FBX.
 - `fal-media` — Interactive AI asset generation via the fal.ai model catalog: images, skyboxes, 3D models, sound effects, music, speech, and video.
+- `godot-editor` — Drive the Godot engine via the Godot MCP server (Coding-Solo): launch the editor, run projects, read/modify scenes and nodes, edit scripts, and capture debug/console output so scene work and run-time debugging act on the real project.
 - `playwright` — Drive a real browser to playtest and QA web (HTML5) builds: navigate, click/drag/type, capture screenshots, and read console + page errors.
 - `unity-editor` — Drive the Unity Editor from the assistant via MCP for Unity (CoplayDev): inspect and modify scenes and GameObjects, manage and import assets, run Editor menu items, read the console, and edit/run C# — so scene scaffolding and audits act directly in the Editor instead of hand-editing YAML.
 
@@ -45,6 +46,7 @@ launch and never written to disk. Set the variable (e.g. `FAL_KEY`) before use.
 ```bash
 codex mcp add blender -- uvx blender-mcp
 codex mcp add fal-media -- npx -y fal-ai-mcp-server
+codex mcp add godot-editor -- npx -y @coding-solo/godot-mcp
 codex mcp add playwright -- npx -y @playwright/mcp@latest
 codex mcp add unity-editor -- uvx --from mcpforunityserver mcp-for-unity --transport stdio
 ```
@@ -55,4 +57,4 @@ These catalog entries still use a `<your-...-command>` placeholder, so they are
 intentionally **not** emitted here — give them a real command in
 [../mcp-servers.json](../mcp-servers.json) and re-run `npm run sync:mcp`:
 
-`ci-builds`, `fetch-docs`, `filesystem`, `git`, `github`, `godot-docs`, `issue-tracker`, `ripgrep`, `storefront-docs`, `telemetry`, `unity-docs`, `unity-package-registry`, `unreal-docs`
+`ci-builds`, `fetch-docs`, `filesystem`, `git`, `github`, `godot-docs`, `issue-tracker`, `ripgrep`, `storefront-docs`, `telemetry`, `unity-docs`, `unity-package-registry`, `unreal-docs`, `unreal-editor`

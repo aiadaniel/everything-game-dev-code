@@ -29,8 +29,8 @@ those two commands.
 
 | Tool | Gives you | Needed by | Install |
 |---|---|---|---|
-| Node.js 18+ | `npx` | `fal-media`, `playwright` | Likely already installed (`node -v`); else [nodejs.org](https://nodejs.org) |
-| uv | `uvx` | `blender`, `unity-editor` | `winget install astral-sh.uv` (Windows) · `curl -LsSf https://astral.sh/uv/install.sh \| sh` (macOS/Linux) · or `pip install uv` |
+| Node.js 18+ | `npx` | `fal-media`, `playwright`, `godot-editor` | Likely already installed (`node -v`); else [nodejs.org](https://nodejs.org) |
+| uv | `uvx` / `uv` | `blender`, `unity-editor`, `unreal-editor` | `winget install astral-sh.uv` (Windows) · `curl -LsSf https://astral.sh/uv/install.sh \| sh` (macOS/Linux) · or `pip install uv` |
 
 > **If a server won't start, it's almost always PATH.** The harness launches
 > `uvx`/`npx` itself, so they must be resolvable in its environment. Check with
@@ -78,6 +78,8 @@ tools actually *work*, each server needs one more thing:
 | `fal-media` | Generates images, 3D, audio, video via fal.ai | A fal.ai key in the `FAL_KEY` environment variable | `FAL_KEY` |
 | `blender` | Inspects a Blender scene and runs `bpy` Python (geometry, export, validation) | **Blender open** with the BlenderMCP add-on **server started** — see the walkthrough below | — |
 | `unity-editor` | Drives the Unity Editor (scenes, GameObjects, assets, console, C#) | **Unity Editor open** with the MCP for Unity bridge package installed — see the Unity note below | — |
+| `godot-editor` | Drives Godot (editor, run project, scenes/nodes, scripts, debug output) | **Godot installed** (auto-detected; set `GODOT_PATH` only if detection fails) | — |
+| `unreal-editor` | Drives the Unreal Editor (actors, blueprints, levels) | **Not pre-wired** — clone the server, set its path, install the UnrealMCP plugin, keep the Editor open — see the Unreal note below | — |
 
 Secrets are never written into the configs — env values are emitted as `${VAR}`
 and read from your environment at launch. Set `FAL_KEY` in your shell/harness
@@ -152,6 +154,39 @@ edit/run C# directly in the Editor.
 
 Prereqs: Unity 2021.3 LTS+ and Python 3.10+ with uv. This server is
 Unity-specific — it does nothing for Unreal/Godot/web projects.
+
+## Godot MCP (engine control)
+
+`godot-editor` is **pre-wired and portable** — it runs straight from npm via
+`npx -y @coding-solo/godot-mcp`, no clone or path needed. It launches the editor,
+runs projects, reads/edits scenes and scripts, and captures debug output.
+
+1. Have **Godot installed**. The server auto-detects it; only set `GODOT_PATH`
+   in your environment if detection fails.
+2. Reload your harness and try *"run the Godot project and show me any errors"*.
+
+Godot-specific — it does nothing for Unity/Unreal/web projects.
+
+## Unreal MCP (engine control) — manual setup
+
+`unreal-editor` is the **one server not pre-wired**: the canonical server
+([chongdashu/unreal-mcp](https://github.com/chongdashu/unreal-mcp)) has no
+portable npx/uvx package — it launches from a local clone, so its path is
+machine-specific and the scaffold can't commit it.
+
+1. **Clone the server** and **install the UnrealMCP plugin**
+   (`MCPGameProject/Plugins/UnrealMCP`) in your Unreal project; keep the Editor open.
+2. **Install `uv`** (Python 3.10+).
+3. **Register it in your harness** with the real path, e.g. for Claude Code:
+
+   ```bash
+   claude mcp add unreal-editor -- uv --directory /path/to/unreal-mcp/Python run unreal_mcp_server.py
+   ```
+
+   The catalog entry documents the same command with a `<path-to-your-clone>`
+   placeholder; `mcp-configs/generated/` lists it under "configure per team".
+
+Unreal-specific — it does nothing for Unity/Godot/web projects.
 
 ## Troubleshooting
 

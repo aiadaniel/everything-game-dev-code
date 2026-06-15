@@ -34,13 +34,18 @@ function isPlaceholder(value) {
   return typeof value === "string" && value.includes("<") && value.includes(">");
 }
 
-// A server is runnable when its launch command is a real executable, not a
-// `<your-...-command>` placeholder waiting on team-local setup.
+// A server is runnable only when neither its command nor any argument carries a
+// `<...>` placeholder — i.e. it needs no team-local setup (a missing command) and
+// no machine-specific path (e.g. an Unreal server launched from a local clone).
+function hasPlaceholder(def) {
+  return [def.command, ...(Array.isArray(def.args) ? def.args : [])].some(isPlaceholder);
+}
+
 const allServers = Object.entries(registry.servers).sort(([a], [b]) =>
   a < b ? -1 : a > b ? 1 : 0
 );
-const runnable = allServers.filter(([, def]) => !isPlaceholder(def.command));
-const placeholders = allServers.filter(([, def]) => isPlaceholder(def.command));
+const runnable = allServers.filter(([, def]) => !hasPlaceholder(def));
+const placeholders = allServers.filter(([, def]) => hasPlaceholder(def));
 
 // Env values are emitted as ${VAR} so harnesses that expand environment
 // variables read real values at launch and no secret is ever written to disk.

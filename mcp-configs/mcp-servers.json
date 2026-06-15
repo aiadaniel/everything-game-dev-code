@@ -30,7 +30,8 @@
       "fetch-docs",
       "unreal-docs",
       "issue-tracker",
-      "blender"
+      "blender",
+      "unreal-editor"
     ],
     "godot": [
       "filesystem",
@@ -40,7 +41,8 @@
       "fetch-docs",
       "godot-docs",
       "issue-tracker",
-      "blender"
+      "blender",
+      "godot-editor"
     ],
     "web": [
       "filesystem",
@@ -367,6 +369,57 @@
         "Prereqs: Unity 2021.3 LTS+, Python 3.10+ with uv (provides uvx). First run downloads mcpforunityserver from PyPI.",
         "Engine-specific (engine-control): use only inside Unity work; it does not apply to Unreal/Godot/web. Keep Unity implementation detail in the Unity rules layer.",
         "Pairs with the unity-setup, scene-bootstrap, unity-scene-audit, and unity-review commands. Distinct from unity-docs / unity-package-registry, which are documentation servers, not Editor control."
+      ]
+    },
+    "godot-editor": {
+      "category": "engine-control",
+      "enabled_by_default": false,
+      "recommended": true,
+      "purpose": "Drive the Godot engine via the Godot MCP server (Coding-Solo): launch the editor, run projects, read/modify scenes and nodes, edit scripts, and capture debug/console output so scene work and run-time debugging act on the real project.",
+      "when_to_use": [
+        "run the project and capture debug output / errors while diagnosing a bug",
+        "inspect or modify scene/node structure against the godot rules instead of editing .tscn by hand",
+        "apply a godot-setup / scene work result to the open project",
+        "launch the editor or a scene for a quick playtest loop"
+      ],
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@coding-solo/godot-mcp"
+      ],
+      "env": {},
+      "notes": [
+        "Portable: runs straight from npm (@coding-solo/godot-mcp) via npx, no clone or path needed. GODOT_PATH is optional (auto-detected); set it in your environment only if detection fails.",
+        "Engine-specific (engine-control): use only inside Godot work; it does not apply to Unity/Unreal/web. Keep Godot implementation detail in the Godot rules layer.",
+        "Pairs with the godot-setup, godot-scene-audit, godot-build-fix, and godot-review commands. Distinct from godot-docs, which is a documentation server, not engine control."
+      ]
+    },
+    "unreal-editor": {
+      "category": "engine-control",
+      "enabled_by_default": false,
+      "recommended": true,
+      "purpose": "Drive the Unreal Editor via the Unreal MCP server (chongdashu): control actors, blueprints, levels, and editor automation so scene/blueprint work acts directly in the Editor.",
+      "when_to_use": [
+        "spawn/edit actors and wire blueprints live instead of by hand",
+        "audit level/blueprint structure against the unreal rules while the project is open",
+        "run editor automation or read output while diagnosing a build",
+        "apply an unreal-setup result to the open project"
+      ],
+      "transport": "stdio",
+      "command": "uv",
+      "args": [
+        "--directory",
+        "<path-to-your-clone>/unreal-mcp/Python",
+        "run",
+        "unreal_mcp_server.py"
+      ],
+      "env": {},
+      "notes": [
+        "NOT pre-wired: the canonical server (github.com/chongdashu/unreal-mcp) has no portable npx/uvx package — it launches from a local clone via `uv --directory <path>/Python run unreal_mcp_server.py`, so the path is a per-machine placeholder. Replace it in your own client config; the scaffold never commits a machine path.",
+        "Two halves like the other engine servers: install the UnrealMCP plugin (MCPGameProject/Plugins/UnrealMCP) in your project and keep the Editor open; this server connects to it. Prereqs: Python 3.10+ with uv.",
+        "Engine-specific (engine-control): use only inside Unreal work; it does not apply to Unity/Godot/web. Keep Unreal implementation detail in the Unreal rules layer.",
+        "Pairs with the unreal-setup, unreal-blueprint-audit, unreal-build-fix, and unreal-review commands. Distinct from unreal-docs, which is a documentation server, not Editor control."
       ]
     },
     "playwright": {

@@ -34,8 +34,12 @@ function buildOpencodeMcp() {
     a < b ? -1 : a > b ? 1 : 0
   );
   for (const [id, def] of entries) {
-    const placeholder =
-      typeof def.command === "string" && def.command.includes("<") && def.command.includes(">");
+    // Skip servers with a `<...>` placeholder in the command or any arg (a missing
+    // command, or a machine-specific path) — they can't be pre-wired portably.
+    const parts = [def.command, ...(Array.isArray(def.args) ? def.args : [])];
+    const placeholder = parts.some(
+      (p) => typeof p === "string" && p.includes("<") && p.includes(">")
+    );
     if (placeholder) {
       continue;
     }

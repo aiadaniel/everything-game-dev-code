@@ -16,6 +16,13 @@
         "FAL_KEY": "${FAL_KEY}"
       }
     },
+    "godot-editor": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@coding-solo/godot-mcp"
+      ]
+    },
     "playwright": {
       "command": "npx",
       "args": [
