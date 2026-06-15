@@ -5,7 +5,7 @@ All notable changes to this scaffold should be documented here.
 ## Unreleased
 
 ### Fixed
-- NebulaLance ship orientation: the generated ship model (authored in a 3/4 concept view) imported facing the wrong way; it now always faces forward (+x, toward the enemies) and only pitches up/down with vertical movement, via a tuned base rotation (`SHIP_BASE_ROT`, nose→+x) plus a pitch term. The placeholder cone was aligned to the same native +y facing so both orient identically.
+- NebulaLance ship orientation: the generated ship model (authored in a 3/4 concept view) imported facing diagonally; hand-tuned Euler angles couldn't reliably make it horizontal because the model's nose-tail axis tilts toward the camera. Replaced with a deterministic geometry-based orientation (`orientForwardX`: PCA of the mesh — longest axis → +x, flattest axis → camera, nose disambiguated by cross-section), so the ship always faces forward (+x) and only pitches up/down with vertical movement. Robust for any generated ship model, not just this one.
 
 ### Added
 - `playwright` MCP server (Microsoft official, `@playwright/mcp`) in `mcp-configs/mcp-servers.json`, added to the `web` and `release` profiles: an optional interactive layer for Claude to playtest/QA web (HTML5) builds in a real browser — navigate, interact, screenshot, and read console/page errors — the work the samples currently do via a hand-run Playwright script. Disabled by default; each sample still keeps its reproducible headless smoke path. Browser-only (use an engine MCP for editor control).

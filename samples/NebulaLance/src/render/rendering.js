@@ -26,10 +26,10 @@ import {
 
 const DPR_CAP = 2;
 
-// Base orientation for the generated ship model so its nose faces +x (forward),
-// showing its top face for a clean 2.5D read; runtime adds only a pitch about z
-// from vertical movement (nose up when flying up). Tuned visually.
-const SHIP_BASE_ROT = { x: 0.9, y: 0, z: (-3 * Math.PI) / 4 };
+// The ship geometry is oriented to face +x at load (orientForwardX), so the base
+// rotation is identity; runtime adds only a pitch about z from vertical movement
+// (nose up when flying up).
+const SHIP_BASE_ROT = { x: 0, y: 0, z: 0 };
 const SHIP_PITCH = 0.3;
 
 const COLORS = {
@@ -49,7 +49,7 @@ function modelDef(name, height) {
   return { url: `./assets/models/${name}.obj`, tex: `./assets/models/${name}-tex.jpg`, height };
 }
 const MODELS = {
-  player: { ...modelDef('ship', 0.95), noAutoFace: true },
+  player: { ...modelDef('ship', 0.95), autoFaceX: true },
   force: modelDef('force', 0.9),
   boss: modelDef('boss', 4.0),
   gunner: modelDef('enemy-gunner', 0.8),
@@ -163,8 +163,68 @@ export function createRendering(canvas) {
     textures.push(t);
   }, undefined, () => {});
 
+  // Symmetric 3x3 eigen-decomposition (Jacobi), returns {val,vec} sorted desc.
+  function eigenSym3(A) {
+    const a = A.map((r) => r.slice());
+    const V = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+    for (let sweep = 0; sweep < 32; sweep++) {
+      let p = 0, q = 1, max = Math.abs(a[0][1]);
+      if (Math.abs(a[0][2]) > max) { max = Math.abs(a[0][2]); p = 0; q = 2; }
+      if (Math.abs(a[1][2]) > max) { max = Math.abs(a[1][2]); p = 1; q = 2; }
+      if (max < 1e-10) break;
+      const phi = 0.5 * Math.atan2(2 * a[p][q], a[q][q] - a[p][p]);
+      const c = Math.cos(phi), s = Math.sin(phi);
+      for (let k = 0; k < 3; k++) { const kp = a[k][p], kq = a[k][q]; a[k][p] = c * kp - s * kq; a[k][q] = s * kp + c * kq; }
+      for (let k = 0; k < 3; k++) { const pk = a[p][k], qk = a[q][k]; a[p][k] = c * pk - s * qk; a[q][k] = s * pk + c * qk; }
+      for (let k = 0; k < 3; k++) { const kp = V[k][p], kq = V[k][q]; V[k][p] = c * kp - s * kq; V[k][q] = s * kp + c * kq; }
+    }
+    return [0, 1, 2]
+      .map((i) => ({ val: a[i][i], vec: [V[0][i], V[1][i], V[2][i]] }))
+      .sort((x, y) => y.val - x.val);
+  }
+
+  // Deterministically orient a centered geometry so its longest axis (the ship's
+  // nose-tail line) lies exactly along +x and its flattest axis faces the camera.
+  // This removes the guesswork of hand-tuned Euler angles for 3/4-view models.
+  function orientForwardX(g) {
+    const pos = g.attributes.position;
+    const n = pos.count;
+    let xx = 0, xy = 0, xz = 0, yy = 0, yz = 0, zz = 0;
+    for (let i = 0; i < n; i++) {
+      const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+      xx += x * x; xy += x * y; xz += x * z; yy += y * y; yz += y * z; zz += z * z;
+    }
+    const eig = eigenSym3([[xx, xy, xz], [xy, yy, yz], [xz, yz, zz]]);
+    const nrm = (v) => { const L = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / L, v[1] / L, v[2] / L]; };
+    const cross = (u, v) => [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]];
+    let fwd = nrm(eig[0].vec);     // longest extent = nose-tail
+    let normal = nrm(eig[2].vec);  // flattest extent = top-bottom
+    let side = nrm(cross(normal, fwd));
+    normal = cross(fwd, side);     // re-orthogonalize
+    // Rotation mapping fwd->+x, side->+y, normal->+z (rows are the basis vectors).
+    const m = new THREE.Matrix4().set(
+      fwd[0], fwd[1], fwd[2], 0,
+      side[0], side[1], side[2], 0,
+      normal[0], normal[1], normal[2], 0,
+      0, 0, 0, 1
+    );
+    g.applyMatrix4(m);
+    g.computeBoundingBox();
+    // Nose = the pointier (smaller cross-section) end; flip it to +x if needed.
+    const bx = g.boundingBox;
+    let fc = 0, fs = 0, bc = 0, bs = 0;
+    for (let i = 0; i < n; i++) {
+      const x = pos.getX(i), r = Math.hypot(pos.getY(i), pos.getZ(i));
+      if (x > bx.max.x * 0.55) { fs += r; fc++; }
+      else if (x < bx.min.x * 0.55) { bs += r; bc++; }
+    }
+    const frontSpread = fc ? fs / fc : 0;
+    const backSpread = bc ? bs / bc : 0;
+    if (frontSpread > backSpread) g.rotateZ(Math.PI); // nose was at -x; bring it to +x
+  }
+
   // ---------- model upgrade helper ----------
-  function loadModel({ url, tex, height, noAutoFace }, onReady) {
+  function loadModel({ url, tex, height, noAutoFace, autoFaceX }, onReady) {
     objLoader.load(
       url,
       (group) => {
@@ -187,9 +247,10 @@ export function createRendering(canvas) {
         g.computeBoundingBox();
         const bb = g.boundingBox;
         g.translate(-(bb.min.x + bb.max.x) / 2, -(bb.min.y + bb.max.y) / 2, -(bb.min.z + bb.max.z) / 2);
-        // Most models were authored facing the camera; turn to face +x (forward).
-        // The ship sets its own orientation at runtime (noAutoFace).
-        if (!noAutoFace) g.rotateY(Math.PI / 2);
+        // Ship: orient deterministically by geometry (longest axis -> +x).
+        // Other models: their authored facing turns to +x with a fixed quarter turn.
+        if (autoFaceX) orientForwardX(g);
+        else if (!noAutoFace) g.rotateY(Math.PI / 2);
         const map = texLoader.load(tex, () => {}, undefined, () => {});
         map.colorSpace = THREE.SRGBColorSpace;
         textures.push(map);
