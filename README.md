@@ -154,6 +154,9 @@ Capability-to-model routing lives in [manifests/asset-providers.json](manifests/
 
 Each harness adapter points back to the same shared scaffold rather than becoming a second source of truth.
 
+### MCP servers
+The scaffold curates a set of MCP servers (browser playtesting, AI asset generation, Blender/DCC control, and more) in [mcp-configs/mcp-servers.json](mcp-configs/mcp-servers.json), with ready-to-use, harness-native configs generated into [mcp-configs/generated/](mcp-configs/generated/). MCP is vendor-neutral, so they work with any MCP-capable client. See [docs/mcp-setup.md](docs/mcp-setup.md) for per-harness install and a Blender end-to-end walkthrough.
+
 ### Codex usage
 Codex should start from `AGENTS.md` and `.codex/README.md`. Slash-style commands such as `/plan`, `/gdd`, and `/unity-review` map to `commands/<name>.md`; if the Codex client does not execute slash commands natively, type the command name in chat and ask Codex to run the matching scaffold command.
 For raster-first asset work in Codex, use `$imagegen` alongside the shared art pipeline skills. Good fits include concept sheets, sprite source art, UI mockups, marketing key art, painted backgrounds, and bitmap edits; keep vector/code-native asset work in the normal repo workflows. If a generated image becomes a real project asset, move the selected file from `$CODEX_HOME/generated_images/...` into the workspace and keep the scaffold's naming and folder conventions.

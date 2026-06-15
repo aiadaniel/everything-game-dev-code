@@ -6,6 +6,9 @@ These files let **any MCP-capable harness** use the scaffold's MCP servers. They
 generated from the single source of truth ([../mcp-servers.json](../mcp-servers.json)) —
 edit that catalog and run `npm run sync:mcp`, never edit these files directly.
 
+For full setup instructions (per-harness install, secrets, and a Blender
+end-to-end walkthrough), see [docs/mcp-setup.md](../../docs/mcp-setup.md).
+
 MCP is an open, vendor-neutral protocol, so every server here works with any model
 behind a compatible client. Pick the file for your harness:
 

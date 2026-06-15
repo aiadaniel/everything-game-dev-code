@@ -435,6 +435,7 @@ everything-game-dev-code
 │   │   ├── telemetry-plan.md
 │   │   └── vertical-slice-plan.md
 │   ├── harness-support.md
+│   ├── mcp-setup.md
 │   └── structure-overview.md
 ├── examples
 │   ├── cross-engine-gdd
