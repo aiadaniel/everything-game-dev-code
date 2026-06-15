@@ -29,7 +29,7 @@ const DPR_CAP = 2;
 // Base orientation for the generated ship model so its nose faces +x (forward),
 // showing its top face for a clean 2.5D read; runtime adds only a pitch about z
 // from vertical movement (nose up when flying up). Tuned visually.
-const SHIP_BASE_ROT = { x: 0, y: 0, z: (-3 * Math.PI) / 4 };
+const SHIP_BASE_ROT = { x: 0.9, y: 0, z: (-3 * Math.PI) / 4 };
 const SHIP_PITCH = 0.3;
 
 const COLORS = {
