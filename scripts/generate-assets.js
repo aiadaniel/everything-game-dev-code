@@ -13,7 +13,9 @@
 //   --out <dir>           output directory, created if missing (required)
 //   --name <base>         base filename without extension (default: derived from prompt)
 //   --provider <id>       provider id from the registry (default: registry defaultProvider)
-//   --model <id>          override the capability's default model id
+//   --quality <tier>      budget | balanced | premium (default: registry defaultQuality);
+//                         picks the capability's per-tier model. ASSET_GEN_QUALITY also works.
+//   --model <id>          override the resolved model id (wins over --quality)
 //   --seed <n>            numeric seed for reproducibility (passed through when supported)
 //   --input-json <json>   raw JSON merged over the assembled request input (wins on conflict)
 //   --poll-ms <n>         queue polling interval (default 3000)
@@ -94,12 +96,36 @@ function parseArgs(argv) {
   return args;
 }
 
-// Rough run-cost estimate: per-output capability cost x output count. num_images
+const QUALITY_TIERS = ["budget", "balanced", "premium"];
+
+// Resolve the quality tier: --quality, then ASSET_GEN_QUALITY, then the registry
+// defaultQuality, then "balanced".
+function resolveQuality(registry, args) {
+  const q = args.quality || process.env.ASSET_GEN_QUALITY || registry.defaultQuality || "balanced";
+  if (!QUALITY_TIERS.includes(q)) {
+    fail(`Unknown --quality '${q}'. Choose one of: ${QUALITY_TIERS.join(", ")}.`);
+  }
+  return q;
+}
+
+// Pick the model + per-output cost for a capability: an explicit --model always
+// wins; otherwise the chosen quality tier's model (byQuality); otherwise the
+// capability's plain default. Returns { model, perCost }.
+function resolveModel(capability, args, quality) {
+  const tier = capability.byQuality && capability.byQuality[quality];
+  if (args.model) {
+    const perCost = tier ? tier.estCostUsd : capability.estCostUsd;
+    return { model: args.model, perCost: typeof perCost === "number" ? perCost : 0 };
+  }
+  if (tier) return { model: tier.model, perCost: tier.estCostUsd };
+  return { model: capability.model, perCost: typeof capability.estCostUsd === "number" ? capability.estCostUsd : 0 };
+}
+
+// Rough run-cost estimate: per-output cost x output count. num_images
 // (image/skybox) and explicit batch counts scale it; everything else is one unit.
-function estimateCostUsd(capability, input) {
-  const per = typeof capability.estCostUsd === "number" ? capability.estCostUsd : 0;
+function estimateCostUsd(perCost, input) {
   const count = Number(input.num_images) > 0 ? Number(input.num_images) : 1;
-  return per * count;
+  return perCost * count;
 }
 
 function resolveConfirmThreshold(registry, args) {
@@ -211,7 +237,8 @@ async function main() {
   const registry = loadRegistry();
   const providerId = args.provider || registry.defaultProvider;
   const { provider, capability } = resolveCapability(registry, providerId, type);
-  const model = args.model || capability.model;
+  const quality = resolveQuality(registry, args);
+  const { model, perCost } = resolveModel(capability, args, quality);
 
   let extraInput = {};
   if (args["input-json"]) {
@@ -239,14 +266,15 @@ async function main() {
 
   const endpoint = `${provider.queueBaseUrl}/${model}`;
 
-  const estUsd = estimateCostUsd(capability, input);
+  const estUsd = estimateCostUsd(perCost, input);
   const threshold = resolveConfirmThreshold(registry, args);
   const preApproved = args.yes || process.env.ASSET_GEN_YES === "1";
-  const estLabel = capability.estCostUsd === undefined ? "unknown" : `~$${estUsd.toFixed(2)}`;
+  const estLabel = perCost ? `~$${estUsd.toFixed(2)}` : "unknown";
 
   if (args.dryRun) {
     console.log(`DRY RUN — no request sent.`);
     console.log(`provider : ${provider.id} (${provider.display})`);
+    console.log(`quality  : ${quality}${args.model ? " (model overridden)" : ""}`);
     console.log(`model    : ${model}`);
     console.log(`endpoint : POST ${endpoint}`);
     console.log(`input    : ${JSON.stringify(input, null, 2)}`);
@@ -289,7 +317,7 @@ async function main() {
     "Content-Type": "application/json",
   };
 
-  console.log(`Submitting ${type} request to ${model} (est. ${estLabel}) ...`);
+  console.log(`Submitting ${type} request to ${model} [${quality}] (est. ${estLabel}) ...`);
   const submitted = await requestJson(
     endpoint,
     { method: "POST", headers, body: JSON.stringify(input) },
@@ -352,6 +380,7 @@ async function main() {
   const provenance = {
     provider: provider.id,
     model,
+    quality,
     type,
     prompt: input[capability.promptField],
     input,

@@ -5,6 +5,17 @@
   "type": "object",
   "required": ["version", "description", "defaultProvider", "providers"],
   "additionalProperties": false,
+  "$defs": {
+    "tier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "estCostUsd"],
+      "properties": {
+        "model": { "type": "string", "minLength": 1, "description": "Model id for this quality tier." },
+        "estCostUsd": { "type": "number", "minimum": 0, "description": "Rough per-output cost in USD for this tier's model." }
+      }
+    }
+  },
   "properties": {
     "$schema": { "type": "string" },
     "version": { "type": "integer", "minimum": 1 },
@@ -18,6 +29,11 @@
       "type": "number",
       "minimum": 0,
       "description": "Default cost threshold (USD): a generation run whose estimated cost is at or above this requires explicit confirmation (--yes, or ASSET_GEN_YES=1) before it will run. Overridable per run with --confirm-over or the ASSET_GEN_CONFIRM_OVER env var."
+    },
+    "defaultQuality": {
+      "type": "string",
+      "enum": ["budget", "balanced", "premium"],
+      "description": "Quality/price tier used when none is selected. Each capability's byQuality map picks the model per tier; the agent should ask the user 'quality or price?' once before a generation batch and pass --quality (or set ASSET_GEN_QUALITY). The cost-confirmation gate still applies on top of whichever tier is chosen."
     },
     "nativeFirstCapabilities": {
       "type": "array",
@@ -92,6 +108,17 @@
                     "type": "number",
                     "minimum": 0,
                     "description": "Rough cost in USD for one default-model generation of this capability, used to estimate a run and decide whether confirmation is needed. Approximate and provider-catalog-dependent; not billed by the scaffold."
+                  },
+                  "byQuality": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["budget", "balanced", "premium"],
+                    "description": "Per-quality-tier model selection. --quality (or ASSET_GEN_QUALITY, or the registry defaultQuality) picks one; an explicit --model overrides it. Tiers within a capability are assumed to share the promptField/input shape — when they do not (e.g. a 3D tier that takes an image URL vs a prompt), the caller supplies the right input via --input-json.",
+                    "properties": {
+                      "budget": { "$ref": "#/$defs/tier" },
+                      "balanced": { "$ref": "#/$defs/tier" },
+                      "premium": { "$ref": "#/$defs/tier" }
+                    }
                   },
                   "notes": { "type": "string", "minLength": 1 }
                 }

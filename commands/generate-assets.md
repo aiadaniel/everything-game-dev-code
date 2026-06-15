@@ -33,6 +33,13 @@ fal.ai provider). Decide before doing anything else:
 - For `model3d`, `sfx`, `music`, `speech`, `video`: no harness-native path exists —
   only the API provider (if a key is set) or placeholders.
 
+## Quality vs Price (ask first)
+- Each capability has three tiers in the registry (`budget` / `balanced` / `premium`).
+  Before generating a batch, ask the user once which they want — save money, balanced,
+  or best quality — and pass `--quality <tier>` (default `balanced` if they don't answer).
+  Example spread: a full game-asset pass is ~$2-3 on `budget`, ~$5-7 on `balanced`,
+  ~$10+ on `premium`. An explicit `--model` overrides the tier.
+
 ## Cost & Confirmation
 - API generation costs real money. A directly typed `/generate-assets` is consent for
   the scope the user described, but always `--dry-run` first to see the printed cost

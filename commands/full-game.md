@@ -211,7 +211,10 @@ money on assets on its own. After wiring placeholders:
 - If a key IS present, do not silently start generating. Stop and ask the user once,
   with the estimated total cost, whether to upgrade placeholders to AI-generated
   assets (`/generate-assets` + `ai-asset-generation`) or keep placeholders. Default to
-  placeholders if the run is autonomous and the user cannot answer.
+  placeholders if the run is autonomous and the user cannot answer. In the same ask,
+  offer the quality/price tier (`budget` / `balanced` / `premium`, default `balanced`)
+  and pass `--quality` to every generation — budget keeps most runs under the cost gate;
+  premium will need `--yes` per gated run.
 - When the user opts in, prefer the free path where it exists: for images/skyboxes,
   use the harness-native generator (e.g. Codex `$imagegen`) if available before the
   paid API; 3D/audio/video only have the API path. Generate onto the same names and

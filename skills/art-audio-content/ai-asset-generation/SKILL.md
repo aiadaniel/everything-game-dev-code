@@ -44,6 +44,12 @@ the placeholder path. Never fabricate or hand-place assets to "stand in" for the
   user explicitly asked for, dry-run, show the estimate, and proceed if cheap. For
   autonomous or batch flows, get a clear yes on the total before running. Iterate on
   the cheap default model; reserve the expensive alternative and video for finals.
+- **Quality vs price tier.** Ask the user once, before a batch, which tier to use —
+  `budget`, `balanced`, or `premium` — and pass `--quality` (default `balanced`). The
+  registry's `byQuality` map picks the model per capability (e.g. image: flux-schnell /
+  nano-banana-2 / nano-banana-pro; video: Wan / Seedance / Veo). Budget can keep a whole
+  video run under the cost gate; premium crosses it and needs `--yes`. Tier sets the
+  spend; the gate prevents surprises.
 
 ## Use When
 - placeholder assets exist and the project is ready to upgrade them to real content
