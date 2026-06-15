@@ -92,11 +92,12 @@ claude mcp add blender -s user -- uvx blender-mcp
 the server to the current project only.
 
 > **Windows + Microsoft Store Python gotcha.** Store-installed Python puts
-> console scripts in a per-user folder that may not be on the launcher's PATH,
-> so a bare `uvx` can fail to resolve. If so, register the **full path** to
-> `uvx.exe`, e.g.
-> `C:\Users\<you>\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\Scripts\uvx.exe`.
-> Find it with `python -c "import site,os;print(os.path.join(site.getuserbase(),'Python313','Scripts'))"`.
+> console scripts in a per-user folder that may not be on the harness
+> launcher's PATH, so a bare `uvx` can fail to resolve. If so, register the
+> absolute path to `uvx.exe` instead. Find it with `where uvx` (cmd) or
+> `(Get-Command uvx).Source` (PowerShell). Alternatively install uv via its
+> standalone installer or `winget install astral-sh.uv` so `uvx` lands on PATH
+> and a bare `uvx` works everywhere.
 
 ### 3. Reload and verify
 
