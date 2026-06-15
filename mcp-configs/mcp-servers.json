@@ -44,7 +44,8 @@
       "github",
       "ripgrep",
       "fetch-docs",
-      "issue-tracker"
+      "issue-tracker",
+      "playwright"
     ],
     "liveops": [
       "filesystem",
@@ -64,7 +65,8 @@
       "fetch-docs",
       "issue-tracker",
       "storefront-docs",
-      "ci-builds"
+      "ci-builds",
+      "playwright"
     ]
   },
   "servers": {
@@ -308,6 +310,31 @@
       "notes": [
         "Optional convenience layer. Reproducible production generation goes through scripts/generate-assets.js and manifests/asset-providers.json so provenance sidecars are written.",
         "Follow the AI-generated asset rules in rules/common/asset-pipeline.md regardless of which path generated the file."
+      ]
+    },
+    "playwright": {
+      "category": "playtest",
+      "enabled_by_default": false,
+      "recommended": true,
+      "purpose": "Drive a real browser to playtest and QA web (HTML5) builds: navigate, click/drag/type, capture screenshots, and read console + page errors.",
+      "when_to_use": [
+        "smoke-test a running web build end to end (boot, start, play, restart)",
+        "capture gameplay or menu screenshots for review",
+        "verify menu/HUD flows and surface console or page errors",
+        "check GPU-memory-flat or perf signals exposed on window during play"
+      ],
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ],
+      "env": {},
+      "notes": [
+        "Microsoft's official Playwright MCP. First run needs browsers installed: `npx playwright install chromium`.",
+        "Point it at a local dev/preview server (e.g. `npm run dev` / `npm run preview`), not a file:// path, so ES modules load.",
+        "Optional interactive layer. Each sample still keeps a reproducible smoke path in its own scripts/ (headless sim test + a committed Playwright script); the MCP is for live, ad hoc QA.",
+        "Web-target only — it tests browser builds, not the Unity/Unreal/Godot editors (use an engine MCP for those)."
       ]
     },
     "storefront-docs": {
