@@ -23,6 +23,35 @@ function readText(relPath) {
   return fs.readFileSync(path.join(repoRoot, relPath), "utf8");
 }
 
+// OpenCode's adapter config (opencode.json) carries both the command registry and
+// the MCP servers, so this generator owns the whole file. The `mcp` block is
+// derived from the same catalog as scripts/generate-mcp-configs.js (runnable
+// servers only, ${VAR} env expansion) so the two representations never diverge.
+function buildOpencodeMcp() {
+  const registry = JSON.parse(readText("mcp-configs/mcp-servers.json"));
+  const mcp = {};
+  const entries = Object.entries(registry.servers).sort(([a], [b]) =>
+    a < b ? -1 : a > b ? 1 : 0
+  );
+  for (const [id, def] of entries) {
+    const placeholder =
+      typeof def.command === "string" && def.command.includes("<") && def.command.includes(">");
+    if (placeholder) {
+      continue;
+    }
+    const command = [def.command, ...(Array.isArray(def.args) ? def.args : [])];
+    const entry = { type: "local", command, enabled: true };
+    if (def.env && Object.keys(def.env).length > 0) {
+      entry.environment = {};
+      for (const key of Object.keys(def.env)) {
+        entry.environment[key] = `\${${key}}`;
+      }
+    }
+    mcp[id] = entry;
+  }
+  return mcp;
+}
+
 function parseFrontmatterDescription(text, relPath) {
   const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) {
@@ -89,7 +118,11 @@ for (const name of commandNames) {
 outputs.set(
   ".opencode/opencode.json",
   `${JSON.stringify(
-    { $schema: "https://opencode.ai/config.json", command: opencodeCommands },
+    {
+      $schema: "https://opencode.ai/config.json",
+      command: opencodeCommands,
+      mcp: buildOpencodeMcp(),
+    },
     null,
     2
   )}\n`

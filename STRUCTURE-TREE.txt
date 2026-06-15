@@ -181,6 +181,7 @@ everything-game-dev-code
 │   ├── skills
 │   │   └── README.md
 │   ├── hooks.json
+│   ├── mcp.json
 │   └── README.md
 ├── .githooks
 │   └── pre-commit
@@ -189,6 +190,8 @@ everything-game-dev-code
 │   │   └── ci.yml
 │   └── copilot-instructions.md
 ├── .kiro
+│   ├── settings
+│   │   └── mcp.json
 │   ├── steering
 │   │   ├── product.md
 │   │   ├── README.md
@@ -1481,6 +1484,7 @@ everything-game-dev-code
 ├── .env.example
 ├── .gitignore
 ├── .markdownlint.json
+├── .mcp.json
 ├── .prettierrc
 ├── AGENTS.md
 ├── CHANGELOG.md

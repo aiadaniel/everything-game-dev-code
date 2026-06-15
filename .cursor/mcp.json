@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "blender": {
+      "command": "uvx",
+      "args": [
+        "blender-mcp"
+      ]
+    },
+    "fal-media": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fal-ai-mcp-server"
+      ],
+      "env": {
+        "FAL_KEY": "${FAL_KEY}"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    }
+  }
+}

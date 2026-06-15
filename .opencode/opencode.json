@@ -265,5 +265,36 @@
       "description": "Set up or normalize a web (HTML5) project according to the scaffold rules.",
       "template": "Read .opencode/commands/web-setup.md and execute the shared commands/web-setup.md workflow."
     }
+  },
+  "mcp": {
+    "blender": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "blender-mcp"
+      ],
+      "enabled": true
+    },
+    "fal-media": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "fal-ai-mcp-server"
+      ],
+      "enabled": true,
+      "environment": {
+        "FAL_KEY": "${FAL_KEY}"
+      }
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest"
+      ],
+      "enabled": true
+    }
   }
 }

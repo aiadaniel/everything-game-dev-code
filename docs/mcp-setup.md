@@ -27,19 +27,26 @@ each team to fill in.
 
 ## Adding the scaffold's servers to your harness
 
-Pick the generated file for your harness and apply it once:
+Most harnesses are **pre-wired**: the scaffold commits project-scoped MCP configs
+in the locations these clients read, so opening the repo is enough — no copy step.
 
-| Harness | File | Where it goes |
+| Harness | Pre-wired? | Config (committed) |
 |---|---|---|
-| Claude Code | `generated/mcp.json` | copy to `.mcp.json` at your project root, or use `claude mcp add` (below) |
-| Cursor | `generated/mcp.json` | copy to `.cursor/mcp.json` |
-| Kiro | `generated/mcp.json` | copy to `.kiro/settings/mcp.json` |
-| Windsurf / Cline / VS Code / others | `generated/mcp.json` | the `mcpServers` shape is the de-facto standard |
-| Codex | `generated/codex.toml` | merge `[mcp_servers.*]` into `.codex/config.toml`, or `codex mcp add` |
-| OpenCode | `generated/opencode.mcp.json` | merge the `mcp` block into `.opencode/opencode.json` |
+| Claude Code | yes | `.mcp.json` (repo root) |
+| Cursor | yes | `.cursor/mcp.json` |
+| Kiro | yes | `.kiro/settings/mcp.json` |
+| OpenCode | yes | `mcp` block in `.opencode/opencode.json` |
+| Codex | one step | reads only global `~/.codex/config.toml`; run `codex mcp add` (below) or merge `generated/codex.toml` |
+| Windsurf / Cline / VS Code / others | manual | paste `generated/mcp.json` (`mcpServers` is the de-facto standard) into the client's MCP config |
 
-Secrets are never written to these files: env values are emitted as `${VAR}` and
-read from your environment at launch. Set the variable (e.g. `FAL_KEY`) first.
+These live configs are generated from the catalog by `npm run sync:mcp` (Claude /
+Cursor / Kiro) and `npm run sync:wrappers` (OpenCode), and drift-checked by
+`npm run validate`. The files under `generated/` are per-format reference copies.
+
+Configs are **portable** — they use bare `uvx` / `npx`, no machine paths — so the
+launcher must be able to resolve those commands (see the Windows gotcha below).
+Secrets are never written: env values are emitted as `${VAR}` and read from your
+environment at launch. Set the variable (e.g. `FAL_KEY`) first.
 
 > **Two kinds of servers.** Some servers are pure tools the harness launches
 > (e.g. `playwright`, `fal-media`). Others — like `blender` — also need a
