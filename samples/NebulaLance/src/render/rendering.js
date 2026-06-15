@@ -184,8 +184,9 @@ export function createRendering(canvas) {
   }
 
   // Deterministically orient a centered geometry so its longest axis (the ship's
-  // nose-tail line) lies exactly along +x and its flattest axis faces the camera.
-  // This removes the guesswork of hand-tuned Euler angles for 3/4-view models.
+  // nose-tail line) lies exactly along +x, viewed from the SIDE: the flattest
+  // axis (top-bottom) points up on screen and the medium axis (wingspan) points
+  // toward the camera. This removes hand-tuned Euler angles for 3/4-view models.
   function orientForwardX(g) {
     const pos = g.attributes.position;
     const n = pos.count;
@@ -197,15 +198,15 @@ export function createRendering(canvas) {
     const eig = eigenSym3([[xx, xy, xz], [xy, yy, yz], [xz, yz, zz]]);
     const nrm = (v) => { const L = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / L, v[1] / L, v[2] / L]; };
     const cross = (u, v) => [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]];
-    let fwd = nrm(eig[0].vec);     // longest extent = nose-tail
-    let normal = nrm(eig[2].vec);  // flattest extent = top-bottom
-    let side = nrm(cross(normal, fwd));
-    normal = cross(fwd, side);     // re-orthogonalize
-    // Rotation mapping fwd->+x, side->+y, normal->+z (rows are the basis vectors).
+    const fwd = nrm(eig[0].vec);   // longest extent = nose-tail -> +x
+    let up = nrm(eig[2].vec);      // flattest extent = top-bottom -> +y (vertical)
+    const cam = nrm(cross(fwd, up)); // medium extent = wingspan -> +z (toward camera)
+    up = cross(cam, fwd);          // re-orthogonalize (right-handed: y = z x x)
+    // Rotation mapping fwd->+x, up->+y, cam->+z (rows are the basis vectors).
     const m = new THREE.Matrix4().set(
       fwd[0], fwd[1], fwd[2], 0,
-      side[0], side[1], side[2], 0,
-      normal[0], normal[1], normal[2], 0,
+      up[0], up[1], up[2], 0,
+      cam[0], cam[1], cam[2], 0,
       0, 0, 0, 1
     );
     g.applyMatrix4(m);
