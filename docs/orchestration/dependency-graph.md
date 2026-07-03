@@ -582,7 +582,20 @@ graph LR
   classDef skill fill:#9e6a03,color:#ffffff,stroke:#7d4e00
 ```
 
+## Cocos Creator Engine Commands
+
+```mermaid
+graph LR
+  c_cocos_setup["/cocos-setup"]:::command
+  c_cocos_review["/cocos-review"]:::command
+  c_cocos_build_fix["/cocos-build-fix"]:::command
+  c_cocos_scene_audit["/cocos-scene-audit"]:::command
+  classDef command fill:#1f6feb,color:#ffffff,stroke:#0d419d
+  classDef agent fill:#238636,color:#ffffff,stroke:#196c2e
+  classDef skill fill:#9e6a03,color:#ffffff,stroke:#7d4e00
+```
+
 ## Orphaned Skills
 
-Skills referenced by no command (Required Skills) and no agent (Uses These Skills): 0 of 107. These are reachable only through the agent-skill matrix or ad hoc use — candidates for a command entry point or an explicit agent assignment.
+Skills referenced by no command (Required Skills) and no agent (Uses These Skills): 0 of 111. These are reachable only through the agent-skill matrix or ad hoc use — candidates for a command entry point or an explicit agent assignment.
 

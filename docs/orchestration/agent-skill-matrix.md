@@ -393,6 +393,12 @@ Primary skills:
 - cocos/cocos-build-release
 - cocos/cocos-testing
 
+### cocos-build-resolver
+Primary skills:
+- cocos/cocos-build-release
+- cocos/cocos-project-structure
+- cocos/cocos-testing
+
 ## Routing Rules
 - If a task changes player-facing goals, route through the relevant design agent before engineering finalization.
 - If a task changes architecture, persistence, networking, or build strategy, route through `technical-design-lead` or `architect`.

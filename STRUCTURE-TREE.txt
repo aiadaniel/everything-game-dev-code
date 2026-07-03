@@ -312,6 +312,7 @@ everything-game-dev-code
 │   ├── architect.md
 │   ├── audio-designer.md
 │   ├── build-engineer.md
+│   ├── cocos-build-resolver.md
 │   ├── cocos-reviewer.md
 │   ├── code-reviewer.md
 │   ├── combat-designer.md

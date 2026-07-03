@@ -8,10 +8,10 @@
 <br>
 
 ![license](https://img.shields.io/badge/license-MIT-blue)
-![agents](https://img.shields.io/badge/agents-42-blueviolet)
-![commands](https://img.shields.io/badge/commands-66-orange)
-![skills](https://img.shields.io/badge/skills-107-brightgreen)
-![rules](https://img.shields.io/badge/rules-115-yellow)
+![agents](https://img.shields.io/badge/agents-43-blueviolet)
+![commands](https://img.shields.io/badge/commands-70-orange)
+![skills](https://img.shields.io/badge/skills-111-brightgreen)
+![rules](https://img.shields.io/badge/rules-129-yellow)
 ![contexts](https://img.shields.io/badge/contexts-9-cyan)
 ![harnesses](https://img.shields.io/badge/harnesses-5-red)
 ![engines](https://img.shields.io/badge/engines-Unity%20%7C%20Unreal%20%7C%20Godot%20%7C%20HTML-8A2BE2)

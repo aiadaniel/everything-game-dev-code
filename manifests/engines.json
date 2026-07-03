@@ -49,9 +49,12 @@
       "id": "cocos",
       "display": "Cocos Creator",
       "pathMarkers": [
-        "cocos"
+        "project.json",
+        "settings/",
+        ".scene",
+        ".prefab"
       ],
-      "buildResolverAgent": false
+      "buildResolverAgent": true
     }
   ]
 }
