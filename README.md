@@ -8,7 +8,7 @@
 <br>
 
 ![license](https://img.shields.io/badge/license-MIT-blue)
-![agents](https://img.shields.io/badge/agents-43-blueviolet)
+![agents](https://img.shields.io/badge/agents-44-blueviolet)
 ![commands](https://img.shields.io/badge/commands-70-orange)
 ![skills](https://img.shields.io/badge/skills-111-brightgreen)
 ![rules](https://img.shields.io/badge/rules-129-yellow)
