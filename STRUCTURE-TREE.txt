@@ -11,6 +11,10 @@ everything-game-dev-code
 │   │   ├── audio-pass.md
 │   │   ├── bug-triage.md
 │   │   ├── cert-check.md
+│   │   ├── cocos-build-fix.md
+│   │   ├── cocos-review.md
+│   │   ├── cocos-scene-audit.md
+│   │   ├── cocos-setup.md
 │   │   ├── combat-design.md
 │   │   ├── context.md
 │   │   ├── dialogue-design.md
@@ -98,6 +102,10 @@ everything-game-dev-code
 │   │   ├── audio-pass.md
 │   │   ├── bug-triage.md
 │   │   ├── cert-check.md
+│   │   ├── cocos-build-fix.md
+│   │   ├── cocos-review.md
+│   │   ├── cocos-scene-audit.md
+│   │   ├── cocos-setup.md
 │   │   ├── combat-design.md
 │   │   ├── context.md
 │   │   ├── dialogue-design.md
@@ -210,6 +218,10 @@ everything-game-dev-code
 │   │   ├── audio-pass.md
 │   │   ├── bug-triage.md
 │   │   ├── cert-check.md
+│   │   ├── cocos-build-fix.md
+│   │   ├── cocos-review.md
+│   │   ├── cocos-scene-audit.md
+│   │   ├── cocos-setup.md
 │   │   ├── combat-design.md
 │   │   ├── context.md
 │   │   ├── dialogue-design.md
@@ -300,6 +312,7 @@ everything-game-dev-code
 │   ├── architect.md
 │   ├── audio-designer.md
 │   ├── build-engineer.md
+│   ├── cocos-reviewer.md
 │   ├── code-reviewer.md
 │   ├── combat-designer.md
 │   ├── console-compliance-reviewer.md
@@ -344,6 +357,10 @@ everything-game-dev-code
 │   ├── audio-pass.md
 │   ├── bug-triage.md
 │   ├── cert-check.md
+│   ├── cocos-build-fix.md
+│   ├── cocos-review.md
+│   ├── cocos-scene-audit.md
+│   ├── cocos-setup.md
 │   ├── combat-design.md
 │   ├── context.md
 │   ├── dialogue-design.md
@@ -499,6 +516,22 @@ everything-game-dev-code
 ├── plugins
 │   └── README.md
 ├── rules
+│   ├── cocos
+│   │   ├── asset-pipeline.md
+│   │   ├── build-release.md
+│   │   ├── coding-style.md
+│   │   ├── documentation.md
+│   │   ├── memory.md
+│   │   ├── networking.md
+│   │   ├── patterns.md
+│   │   ├── performance.md
+│   │   ├── project-structure.md
+│   │   ├── qa.md
+│   │   ├── README.md
+│   │   ├── telemetry.md
+│   │   ├── testing.md
+│   │   ├── ui.md
+│   │   └── version-control.md
 │   ├── common
 │   │   ├── accessibility.md
 │   │   ├── agents.md
@@ -1273,6 +1306,15 @@ everything-game-dev-code
 │   │   ├── vfx-pipeline
 │   │   │   └── SKILL.md
 │   │   └── README.md
+│   ├── cocos
+│   │   ├── cocos-build-release
+│   │   │   └── SKILL.md
+│   │   ├── cocos-coding-standards
+│   │   │   └── SKILL.md
+│   │   ├── cocos-project-structure
+│   │   │   └── SKILL.md
+│   │   └── cocos-testing
+│   │       └── SKILL.md
 │   ├── design
 │   │   ├── accessibility-design
 │   │   │   └── SKILL.md

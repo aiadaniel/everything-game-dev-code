@@ -9,7 +9,8 @@
         "rules/unity/**",
         "rules/unreal/**",
         "rules/godot/**",
-        "rules/web/**"
+        "rules/web/**",
+        "rules/cocos/**"
       ],
       "notes": "Installs the full rules layer, including engine-specific overrides. Consumers should still activate only one engine profile at runtime unless doing comparison work."
     },
@@ -199,6 +200,15 @@
         "skills/design/liveops-design/**"
       ],
       "notes": "Mobile economy, retention, and F2P tuning support."
+    },
+    "engine-cocos": {
+      "includes": [
+        "rules/cocos/**",
+        "skills/cocos/**",
+        "agents/cocos-*.md",
+        "commands/cocos-*.md"
+      ],
+      "notes": "Cocos Creator engine surface. Use with baseline components and avoid mixing with other engine packs in active production profiles."
     }
   }
 }

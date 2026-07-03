@@ -172,6 +172,24 @@
         "domain:design",
         "domain:engineering-common"
       ]
+    },
+    {
+      "id": "cocos-production",
+      "summary": "Baseline scaffold plus Cocos Creator surface for a production project.",
+      "components": [
+        "baseline:rules",
+        "baseline:agents",
+        "baseline:commands",
+        "baseline:skills",
+        "baseline:docs",
+        "baseline:contexts",
+        "engine:cocos",
+        "domain:workflow",
+        "domain:design",
+        "domain:engineering-common",
+        "domain:art-audio-content",
+        "domain:qa-release"
+      ]
     }
   ],
   "policy": {

@@ -189,6 +189,17 @@ Skills for planning, documentation, and scaffold-level coordination.
 | `verification-loop` | Verify that implemented work matches its design intent and exits cleanly |
 | `vertical-slice-planning` | Scope a vertical slice as a proof of the core loop, not a demo |
 
+### cocos/
+
+Cocos Creator engine-specific skills. Strictly isolated from the other engine layers.
+
+| Skill | Purpose |
+|-------|---------|
+| `cocos-project-structure` | Organize a Cocos Creator project so source, assets, configuration, and tests stay predictable |
+| `cocos-coding-standards` | Define coding standards and idioms for Cocos Creator game code |
+| `cocos-build-release` | Define build, packaging, and release workflows for Cocos Creator projects |
+| `cocos-testing` | Define automated and manual testing expectations for Cocos Creator projects |
+
 ## Skill file format
 
 Each skill uses a standard YAML frontmatter block followed by a ten-section body:

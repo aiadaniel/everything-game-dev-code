@@ -29,6 +29,22 @@
       "description": "Review the current state against certification and platform compliance expectations.",
       "template": "Read .opencode/commands/cert-check.md and execute the shared commands/cert-check.md workflow."
     },
+    "cocos-build-fix": {
+      "description": "Diagnose and resolve Cocos Creator build, packaging, or configuration issues.",
+      "template": "Read .opencode/commands/cocos-build-fix.md and execute the shared commands/cocos-build-fix.md workflow."
+    },
+    "cocos-review": {
+      "description": "Review a Cocos Creator project for structure, architecture, maintainability, and risk.",
+      "template": "Read .opencode/commands/cocos-review.md and execute the shared commands/cocos-review.md workflow."
+    },
+    "cocos-scene-audit": {
+      "description": "Audit Cocos Creator scenes, content structure, and composition patterns.",
+      "template": "Read .opencode/commands/cocos-scene-audit.md and execute the shared commands/cocos-scene-audit.md workflow."
+    },
+    "cocos-setup": {
+      "description": "Set up or normalize a Cocos Creator project according to the scaffold rules.",
+      "template": "Read .opencode/commands/cocos-setup.md and execute the shared commands/cocos-setup.md workflow."
+    },
     "combat-design": {
       "description": "Design or revise combat rules, variables, readability, and tuning direction.",
       "template": "Read .opencode/commands/combat-design.md and execute the shared commands/combat-design.md workflow."

@@ -453,3 +453,26 @@ Primary: `web-reviewer`
 Support:
 - `2d-artist`
 - `architect`
+
+## Cocos Creator Engine Commands
+
+### /cocos-setup
+Primary: `cocos-reviewer`
+Support:
+- `technical-design-lead`
+- `build-engineer`
+
+### /cocos-review
+Primary: `cocos-reviewer`
+Support:
+- `code-reviewer`
+
+### /cocos-build-fix
+Primary: `cocos-reviewer`
+Support:
+- `build-engineer`
+
+### /cocos-scene-audit
+Primary: `cocos-reviewer`
+Support:
+- `qa-lead`

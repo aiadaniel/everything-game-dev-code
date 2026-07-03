@@ -23,6 +23,7 @@ Commands do not replace judgment. They channel it.
 | `/unreal-setup` | Initialize Unreal project structure, modules, and build toolchain |
 | `/godot-setup` | Initialize Godot project structure, scene layout, and export profiles |
 | `/web-setup` | Initialize web (HTML5) project structure, build tooling, and deployment targets |
+| `/cocos-setup` | Initialize Cocos Creator project structure and conventions |
 | `/onboarding` | Orient a new contributor to the project scaffold and active context |
 | `/context` | Activate a project phase context and align agents, commands, and priorities to it |
 
@@ -77,6 +78,8 @@ Commands do not replace judgment. They channel it.
 | `/godot-scene-audit` | Audit a Godot scene for structural issues and performance risk |
 | `/web-review` | Review web (HTML5) code and architecture for quality and compliance |
 | `/web-scene-audit` | Audit web game scenes, screen flow, state transitions, and teardown patterns |
+| `/cocos-review` | Review Cocos Creator code and content for quality and compliance |
+| `/cocos-scene-audit` | Audit Cocos Creator scenes and content structure |
 | `/ui-flow-review` | Review menus, HUD, navigation, and player flow from a UX perspective |
 | `/multiplayer-review` | Review network architecture, replication, and latency handling |
 | `/save-system-review` | Review save/load implementation for correctness and resilience |
@@ -90,6 +93,7 @@ Commands do not replace judgment. They channel it.
 | `/unreal-build-fix` | Diagnose and resolve Unreal build failures |
 | `/godot-build-fix` | Diagnose and resolve Godot build failures |
 | `/web-build-fix` | Diagnose and resolve web build, bundling, or deployment issues |
+| `/cocos-build-fix` | Diagnose and resolve Cocos Creator build failures |
 
 ### Testing and quality
 

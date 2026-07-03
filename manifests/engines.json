@@ -6,26 +6,52 @@
     {
       "id": "web",
       "display": "Web (HTML5)",
-      "pathMarkers": ["index.html", "<canvas", "phaser", "requestanimationframe"],
+      "pathMarkers": [
+        "index.html",
+        "<canvas",
+        "phaser",
+        "requestanimationframe"
+      ],
       "buildResolverAgent": false
     },
     {
       "id": "unity",
       "display": "Unity",
-      "pathMarkers": ["assets/", ".unity", "projectsettings/"],
+      "pathMarkers": [
+        "assets/",
+        ".unity",
+        "projectsettings/"
+      ],
       "buildResolverAgent": true
     },
     {
       "id": "unreal",
       "display": "Unreal Engine",
-      "pathMarkers": [".uproject", "/content/", ".uasset", ".umap"],
+      "pathMarkers": [
+        ".uproject",
+        "/content/",
+        ".uasset",
+        ".umap"
+      ],
       "buildResolverAgent": true
     },
     {
       "id": "godot",
       "display": "Godot",
-      "pathMarkers": ["project.godot", ".tscn", ".tres"],
+      "pathMarkers": [
+        "project.godot",
+        ".tscn",
+        ".tres"
+      ],
       "buildResolverAgent": true
+    },
+    {
+      "id": "cocos",
+      "display": "Cocos Creator",
+      "pathMarkers": [
+        "cocos"
+      ],
+      "buildResolverAgent": false
     }
   ]
 }
