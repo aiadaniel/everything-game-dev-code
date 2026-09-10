@@ -62,9 +62,11 @@ content never leaks in, and local output matches what CI regenerates from a clea
 - `skills/` — reusable execution patterns, **grouped by category**, each leaf a folder with a `SKILL.md`.
 - `contexts/` — phase-specific priority shifts (e.g. prototype vs. release).
 - `hooks/` — workflow safety automation (`hooks/hooks.json` is the source).
-- `manifests/` — install profiles/components and two key registries: `engines.json` (the single
-  source of truth for which engine layers exist; array order is path-detection priority) and
-  `asset-providers.json` (capability→model routing for AI asset generation).
+- `manifests/` — install profiles/components and three key registries: `engines.json` (the single
+  source of truth for which engine layers exist; array order is path-detection priority),
+  `harnesses.json` (which harness adapters exist and what each supports — wrappers, MCP, and
+  doctor checks derive from it), and `asset-providers.json` (capability→model routing for AI
+  asset generation).
 - `schemas/` — JSON Schema (ajv) validation for every manifest, hook config, and plugin.
 - `docs/templates/` — structured deliverable templates (GDD, TDD, QA plan, etc.).
 
@@ -73,7 +75,7 @@ content never leaks in, and local output matches what CI regenerates from a clea
 (all engine lists derive from `manifests/engines.json`), `structure-artifacts.js`, and
 `profile-resolution.js`. Per-event hook implementations are in `scripts/hooks/`.
 
-**Harness adapters** (`.claude/`, `.codex/`, `.cursor/`, `.opencode/`, `.kiro/`): each points back
+**Harness adapters** (`.claude/`, `.codex/`, `.cursor/`, `.opencode/`, `.kiro/`, `.grok/`, `.kilo/`): each points back
 to the shared scaffold rather than being a second source of truth. Their command wrappers are generated.
 
 ## Engine isolation (hard rule)
@@ -85,7 +87,8 @@ by `tests/lib/engine-isolation.test.js` and `engine-content-isolation.test.js` �
 references will fail the suite.
 
 Adding a new engine layer is done via `npm run new:engine` (driven by `manifests/engines.json`),
-not by hand-creating directories.
+not by hand-creating directories. Likewise, a new harness adapter is added via
+`npm run new:harness` (driven by `manifests/harnesses.json`).
 
 ## Conventions to preserve
 

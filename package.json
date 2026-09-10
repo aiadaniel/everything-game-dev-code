@@ -1,12 +1,13 @@
 {
   "name": "everything-game-dev-code",
-  "version": "0.4.0",
+  "version": "0.6.0",
   "private": true,
   "description": "A universal AI-assisted scaffold for game development across Unity, Unreal, Godot, and the web (HTML5).",
   "license": "MIT",
   "scripts": {
     "setup:hooks": "node scripts/setup-git-hooks.js",
     "new:engine": "node scripts/new-engine.js",
+    "new:harness": "node scripts/new-harness.js",
     "doctor": "node scripts/doctor.js",
     "test": "node tests/run-all.js",
     "validate": "npm run validate:manifests && npm run validate:engines && npm run validate:hooks && npm run validate:schemas && npm run validate:structure && npm run validate:wrappers && npm run validate:mcp && npm run validate:references && npm run validate:generated-assets && npm run validate:structure-artifacts && npm run validate:graph && npm run lint:markdown",

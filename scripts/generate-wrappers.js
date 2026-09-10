@@ -6,15 +6,18 @@
 //   node scripts/generate-wrappers.js          rewrite wrappers in place
 //   node scripts/generate-wrappers.js --check  exit 1 if anything would change
 //
-// Outputs per source command <name>:
-//   .claude/commands/<name>.md   frontmatter description + resolution line
-//   .codex/commands/<name>.md    same format as .claude
-//   .opencode/commands/<name>.md adapter-behavior wrapper (owners derived
-//                                from the source command's Invokes Agents)
-//   .opencode/opencode.json      command registry (descriptions + templates)
+// Which harnesses get wrappers, and in which format, is declared in
+// manifests/harnesses.json (the harness adapter registry). Per source command
+// <name>, every harness whose `commands.style` is "claude" gets a
+// frontmatter-description wrapper in its `commands.dir`; the "opencode" style
+// gets an adapter-behavior wrapper (owners derived from the source command's
+// Invokes Agents) plus a JSON command registry at `commands.registry`.
 
 const fs = require("fs");
 const path = require("path");
+const { sameText } = require("./lib/text");
+const { loadHarnesses } = require("./lib/harnesses");
+const { loadMcpRegistry, runnableServers, buildEmbeddedMcp } = require("./lib/mcp-catalog");
 
 const repoRoot = path.resolve(__dirname, "..");
 const checkOnly = process.argv.includes("--check");
@@ -24,36 +27,11 @@ function readText(relPath) {
 }
 
 // OpenCode's adapter config (opencode.json) carries both the command registry and
-// the MCP servers, so this generator owns the whole file. The `mcp` block is
-// derived from the same catalog as scripts/generate-mcp-configs.js (runnable
-// servers only, ${VAR} env expansion) so the two representations never diverge.
+// the MCP servers, so this generator owns the whole file. The `mcp` block uses
+// the shared embedded shape from scripts/lib/mcp-catalog.js so it cannot drift
+// from generate-mcp-configs.js (Kilo uses the same object in .kilo/kilo.json).
 function buildOpencodeMcp() {
-  const registry = JSON.parse(readText("mcp-configs/mcp-servers.json"));
-  const mcp = {};
-  const entries = Object.entries(registry.servers).sort(([a], [b]) =>
-    a < b ? -1 : a > b ? 1 : 0
-  );
-  for (const [id, def] of entries) {
-    // Skip servers with a `<...>` placeholder in the command or any arg (a missing
-    // command, or a machine-specific path) — they can't be pre-wired portably.
-    const parts = [def.command, ...(Array.isArray(def.args) ? def.args : [])];
-    const placeholder = parts.some(
-      (p) => typeof p === "string" && p.includes("<") && p.includes(">")
-    );
-    if (placeholder) {
-      continue;
-    }
-    const command = [def.command, ...(Array.isArray(def.args) ? def.args : [])];
-    const entry = { type: "local", command, enabled: true };
-    if (def.env && Object.keys(def.env).length > 0) {
-      entry.environment = {};
-      for (const key of Object.keys(def.env)) {
-        entry.environment[key] = `\${${key}}`;
-      }
-    }
-    mcp[id] = entry;
-  }
-  return mcp;
+  return buildEmbeddedMcp(runnableServers(loadMcpRegistry()));
 }
 
 function parseFrontmatterDescription(text, relPath) {
@@ -100,6 +78,7 @@ const commandNames = fs
   .map((file) => path.basename(file, ".md"))
   .sort();
 
+const commandHarnesses = loadHarnesses().filter((harness) => harness.commands);
 const outputs = new Map();
 const opencodeCommands = {};
 
@@ -109,36 +88,46 @@ for (const name of commandNames) {
   const description = parseFrontmatterDescription(sourceText, sourceRelPath);
   const agents = parseHeadingBullets(sourceText, "Invokes Agents");
 
-  outputs.set(`.claude/commands/${name}.md`, claudeStyleWrapper(name, description));
-  outputs.set(`.codex/commands/${name}.md`, claudeStyleWrapper(name, description));
-  outputs.set(`.opencode/commands/${name}.md`, opencodeWrapper(name, description, agents));
-
-  opencodeCommands[name] = {
-    description,
-    template: `Read .opencode/commands/${name}.md and execute the shared commands/${name}.md workflow.`,
-  };
+  for (const harness of commandHarnesses) {
+    const { dir, style } = harness.commands;
+    if (style === "claude") {
+      outputs.set(`${dir}/${name}.md`, claudeStyleWrapper(name, description));
+    } else if (style === "opencode") {
+      outputs.set(`${dir}/${name}.md`, opencodeWrapper(name, description, agents));
+      opencodeCommands[name] = {
+        description,
+        template: `Read ${dir}/${name}.md and execute the shared commands/${name}.md workflow.`,
+      };
+    }
+  }
 }
 
-outputs.set(
-  ".opencode/opencode.json",
-  `${JSON.stringify(
-    {
-      $schema: "https://opencode.ai/config.json",
-      command: opencodeCommands,
-      mcp: buildOpencodeMcp(),
-    },
-    null,
-    2
-  )}\n`
-);
+for (const harness of commandHarnesses) {
+  if (harness.commands.style !== "opencode") {
+    continue;
+  }
+  outputs.set(
+    harness.commands.registry,
+    `${JSON.stringify(
+      {
+        $schema: "https://opencode.ai/config.json",
+        command: opencodeCommands,
+        mcp: buildOpencodeMcp(),
+      },
+      null,
+      2
+    )}\n`
+  );
+}
 
 const changed = [];
 for (const [relPath, content] of outputs) {
   const fullPath = path.join(repoRoot, relPath);
   const current = fs.existsSync(fullPath) ? fs.readFileSync(fullPath, "utf8") : null;
-  if (current !== content) {
+  if (!sameText(current, content)) {
     changed.push(relPath);
     if (!checkOnly) {
+      fs.mkdirSync(path.dirname(fullPath), { recursive: true });
       fs.writeFileSync(fullPath, content, "utf8");
     }
   }

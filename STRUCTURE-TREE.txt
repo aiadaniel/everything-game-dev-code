@@ -178,6 +178,74 @@ everything-game-dev-code
 │   ├── config.toml
 │   └── README.md
 ├── .cursor
+│   ├── commands
+│   │   ├── accessibility-pass.md
+│   │   ├── animation-pass.md
+│   │   ├── art-2d-pass.md
+│   │   ├── art-3d-pass.md
+│   │   ├── audio-pass.md
+│   │   ├── bug-triage.md
+│   │   ├── cert-check.md
+│   │   ├── combat-design.md
+│   │   ├── context.md
+│   │   ├── dialogue-design.md
+│   │   ├── economy-balance.md
+│   │   ├── evolve.md
+│   │   ├── full-game.md
+│   │   ├── game-feel-pass.md
+│   │   ├── gdd.md
+│   │   ├── generate-assets.md
+│   │   ├── godot-build-fix.md
+│   │   ├── godot-placeholders.md
+│   │   ├── godot-review.md
+│   │   ├── godot-scene-audit.md
+│   │   ├── godot-setup.md
+│   │   ├── input-review.md
+│   │   ├── learn.md
+│   │   ├── level-beat.md
+│   │   ├── liveops-brief.md
+│   │   ├── localization-pass.md
+│   │   ├── memory-budget.md
+│   │   ├── milestone-plan.md
+│   │   ├── multiplayer-review.md
+│   │   ├── onboarding.md
+│   │   ├── orchestrate.md
+│   │   ├── patch-notes.md
+│   │   ├── perf-budget.md
+│   │   ├── plan.md
+│   │   ├── playtest-report.md
+│   │   ├── procgen-design.md
+│   │   ├── qa-plan.md
+│   │   ├── quest-design.md
+│   │   ├── README.md
+│   │   ├── refactor-clean.md
+│   │   ├── release-check.md
+│   │   ├── save-system-review.md
+│   │   ├── scene-bootstrap.md
+│   │   ├── skill-create-game.md
+│   │   ├── tdd.md
+│   │   ├── tech-design.md
+│   │   ├── telemetry-plan.md
+│   │   ├── tools-pass.md
+│   │   ├── ui-asset-pass.md
+│   │   ├── ui-flow-review.md
+│   │   ├── unity-build-fix.md
+│   │   ├── unity-placeholders.md
+│   │   ├── unity-review.md
+│   │   ├── unity-scene-audit.md
+│   │   ├── unity-setup.md
+│   │   ├── unreal-blueprint-audit.md
+│   │   ├── unreal-build-fix.md
+│   │   ├── unreal-review.md
+│   │   ├── unreal-setup.md
+│   │   ├── update-docs.md
+│   │   ├── verify.md
+│   │   ├── vertical-slice.md
+│   │   ├── web-build-fix.md
+│   │   ├── web-placeholders.md
+│   │   ├── web-review.md
+│   │   ├── web-scene-audit.md
+│   │   └── web-setup.md
 │   ├── hooks
 │   │   └── README.md
 │   ├── rules
@@ -197,6 +265,79 @@ everything-game-dev-code
 │   ├── workflows
 │   │   └── ci.yml
 │   └── copilot-instructions.md
+├── .grok
+│   ├── config.toml
+│   └── README.md
+├── .kilo
+│   ├── command
+│   │   ├── accessibility-pass.md
+│   │   ├── animation-pass.md
+│   │   ├── art-2d-pass.md
+│   │   ├── art-3d-pass.md
+│   │   ├── audio-pass.md
+│   │   ├── bug-triage.md
+│   │   ├── cert-check.md
+│   │   ├── combat-design.md
+│   │   ├── context.md
+│   │   ├── dialogue-design.md
+│   │   ├── economy-balance.md
+│   │   ├── evolve.md
+│   │   ├── full-game.md
+│   │   ├── game-feel-pass.md
+│   │   ├── gdd.md
+│   │   ├── generate-assets.md
+│   │   ├── godot-build-fix.md
+│   │   ├── godot-placeholders.md
+│   │   ├── godot-review.md
+│   │   ├── godot-scene-audit.md
+│   │   ├── godot-setup.md
+│   │   ├── input-review.md
+│   │   ├── learn.md
+│   │   ├── level-beat.md
+│   │   ├── liveops-brief.md
+│   │   ├── localization-pass.md
+│   │   ├── memory-budget.md
+│   │   ├── milestone-plan.md
+│   │   ├── multiplayer-review.md
+│   │   ├── onboarding.md
+│   │   ├── orchestrate.md
+│   │   ├── patch-notes.md
+│   │   ├── perf-budget.md
+│   │   ├── plan.md
+│   │   ├── playtest-report.md
+│   │   ├── procgen-design.md
+│   │   ├── qa-plan.md
+│   │   ├── quest-design.md
+│   │   ├── refactor-clean.md
+│   │   ├── release-check.md
+│   │   ├── save-system-review.md
+│   │   ├── scene-bootstrap.md
+│   │   ├── skill-create-game.md
+│   │   ├── tdd.md
+│   │   ├── tech-design.md
+│   │   ├── telemetry-plan.md
+│   │   ├── tools-pass.md
+│   │   ├── ui-asset-pass.md
+│   │   ├── ui-flow-review.md
+│   │   ├── unity-build-fix.md
+│   │   ├── unity-placeholders.md
+│   │   ├── unity-review.md
+│   │   ├── unity-scene-audit.md
+│   │   ├── unity-setup.md
+│   │   ├── unreal-blueprint-audit.md
+│   │   ├── unreal-build-fix.md
+│   │   ├── unreal-review.md
+│   │   ├── unreal-setup.md
+│   │   ├── update-docs.md
+│   │   ├── verify.md
+│   │   ├── vertical-slice.md
+│   │   ├── web-build-fix.md
+│   │   ├── web-placeholders.md
+│   │   ├── web-review.md
+│   │   ├── web-scene-audit.md
+│   │   └── web-setup.md
+│   ├── kilo.json
+│   └── README.md
 ├── .kiro
 │   ├── settings
 │   │   └── mcp.json
@@ -503,6 +644,7 @@ everything-game-dev-code
 ├── manifests
 │   ├── asset-providers.json
 │   ├── engines.json
+│   ├── harnesses.json
 │   ├── install-components.json
 │   ├── install-modules.json
 │   ├── install-profiles.json
@@ -510,6 +652,7 @@ everything-game-dev-code
 ├── mcp-configs
 │   ├── generated
 │   │   ├── codex.toml
+│   │   ├── kilo.json
 │   │   ├── mcp.json
 │   │   ├── opencode.mcp.json
 │   │   └── README.md
@@ -1213,6 +1356,7 @@ everything-game-dev-code
 ├── schemas
 │   ├── asset-providers.schema.json
 │   ├── engines.schema.json
+│   ├── harnesses.schema.json
 │   ├── hooks.schema.json
 │   ├── install-components.schema.json
 │   ├── install-modules.schema.json
@@ -1237,10 +1381,13 @@ everything-game-dev-code
 │   │   └── session-summary.js
 │   ├── lib
 │   │   ├── engines.js
+│   │   ├── harnesses.js
 │   │   ├── hook-wiring.js
+│   │   ├── mcp-catalog.js
 │   │   ├── profile-resolution.js
 │   │   ├── schema-validation.js
 │   │   ├── structure-artifacts.js
+│   │   ├── text.js
 │   │   ├── utils.js
 │   │   └── validation.js
 │   ├── doctor.js
@@ -1252,6 +1399,7 @@ everything-game-dev-code
 │   ├── install-profile.js
 │   ├── lint-markdown.js
 │   ├── new-engine.js
+│   ├── new-harness.js
 │   ├── README.md
 │   ├── setup-git-hooks.js
 │   ├── setup-profile.js
@@ -1520,11 +1668,14 @@ everything-game-dev-code
 │   ├── schemas
 │   │   └── manifests-schema.test.js
 │   ├── scripts
+│   │   ├── mcp-configs.test.js
 │   │   ├── new-engine.test.js
+│   │   ├── new-harness.test.js
 │   │   └── setup-profile.test.js
 │   ├── README.md
 │   └── run-all.js
 ├── .env.example
+├── .gitattributes
 ├── .gitignore
 ├── .markdownlint.json
 ├── .mcp.json
