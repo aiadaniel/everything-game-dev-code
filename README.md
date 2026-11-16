@@ -8,9 +8,9 @@
 <br>
 
 ![license](https://img.shields.io/badge/license-MIT-blue)
-![agents](https://img.shields.io/badge/agents-44-blueviolet)
-![commands](https://img.shields.io/badge/commands-70-orange)
-![skills](https://img.shields.io/badge/skills-111-brightgreen)
+![agents](https://img.shields.io/badge/agents-45-blueviolet)
+![commands](https://img.shields.io/badge/commands-71-orange)
+![skills](https://img.shields.io/badge/skills-113-brightgreen)
 ![rules](https://img.shields.io/badge/rules-129-yellow)
 ![contexts](https://img.shields.io/badge/contexts-9-cyan)
 ![harnesses](https://img.shields.io/badge/harnesses-5-red)
